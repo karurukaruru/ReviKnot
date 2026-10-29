@@ -1,0 +1,16 @@
+F
+======================================================================
+FAIL: test_candidate_preserves_captured_input (test_boundary_contract.CapturedBoundaryContract.test_candidate_preserves_captured_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\nv\PatchCourt-Handoff-0.3.2-20261025\work\outputs\submission-060\mcp-workflow-03\regression-gate\test_boundary_contract.py", line 78, in test_candidate_preserves_captured_input
+    self.assertEqual(verdict["status"], "PASS", "Captured contract is not preserved: " + str(finding_paths))
+AssertionError: 'FAIL' != 'PASS'
+- FAIL
++ PASS
+ : Captured contract is not preserved: [('ORPHAN_RESULT', '/3/tool_call_id'), ('ORPHAN_RESULT', '/4/tool_call_id'), ('SEMANTIC_CHANGE', '/2/tool_calls/0'), ('SEMANTIC_CHANGE', '/2/tool_calls/1')]
+
+----------------------------------------------------------------------
+Ran 1 test in 0.031s
+
+FAILED (failures=1)

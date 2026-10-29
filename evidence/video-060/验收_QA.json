@@ -1,0 +1,41 @@
+{
+  "product": "ReviKnot",
+  "version": "0.6.0",
+  "status": "PASS",
+  "duration_seconds": 96,
+  "narration": false,
+  "subtitles": 20,
+  "captions_sha256": "967617db545aa9d521b09c0b6bc12b83cacabbc3d46736785a993cd2153125b9",
+  "new_inference_calls": 0,
+  "source_report_sha256": "814360be132b7fb2593275449409fff3d61f641ac39e8b08d13cf149b1e48621",
+  "source_audio_sha256": "8ffe29213b7b4b67094a915480f77d2987fd7b4e61b23eb72746f1364f819f97",
+  "picture_matches_master": true,
+  "visual_review": "PASS",
+  "files": {
+    "ReviKnot-96s-Demo.mp4": {
+      "sha256": "bd5037b0b6c786cfacdadc8c95b330a54e7e673cbcf48e1512fccfe4d3b0da2f",
+      "bytes": 15613538,
+      "width": 1920,
+      "height": 1080,
+      "frames": 2880,
+      "fps": "30/1",
+      "decode": "PASS",
+      "audio_lufs": -19.06,
+      "audio_true_peak_dbtp": -4.34,
+      "video_stream_sha256": "SHA256=d1841ddc14a883177651e06b7873b349812cfc172e5e572f9475b41821df5c16",
+      "pixel_format": "yuvj420p",
+      "color_range": "pc",
+      "color_space": "bt470bg"
+    }
+  },
+  "english_on_screen_review": "PASS",
+  "platform_model_on_screen_review": "PASS",
+  "spoken_platform_attribution": false,
+  "visual_platform_attribution": true,
+  "english_explanation_on_screen": true,
+  "master_sha256": "82d9393b843a6415a111e1b7d6bae698a02c51b3d43a9f72f830c0cb6c61c1a6",
+  "visual_review_report_sha256": "d5ba81ee7717ff16638d5edbcdbd88cbeae1798cb75e855aeff99af18bde1153",
+  "visual_review_samples": 105,
+  "visual_review_scope": "Current movie:96evenlysampled frame views plus9full-resolution keyframes;20cue nativeChrome check. Current repository link reviewed in finale.",
+  "viewer_qa_sha256": "3c4cf69eaa4ce4410073110a10f7d0c669136cceaf1532238c6ff494d9fd18de"
+}

@@ -1,0 +1,117 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Installed browser available",
+    "Landing desktop has no horizontal overflow",
+    "Landing discloses recorded evidence",
+    "Exported link works: repair.html",
+    "Exported link works: sdk-upgrade.html",
+    "Exported link works: agent_code_validator-0.5.2-py3-none-any.whl",
+    "Exported link works: evidence/live/report.json",
+    "Exported link works: ci-gate.zip",
+    "Exported link works: evidence/ci-gate/report.json",
+    "Replay identifies recording and provider",
+    "No recovered value before playback",
+    "Recovered task value comes from saved execution",
+    "Independent controls displayed",
+    "Corrupted repair rejection displayed",
+    "Replay desktop has no overflow",
+    "Repair pane contains eight actual controls",
+    "Requested and returned model identity visible",
+    "Second replay clears all prior success indicators",
+    "Replay mobile has no horizontal overflow",
+    "Landing mobile has no horizontal overflow",
+    "SDK inspector desktop has no horizontal overflow",
+    "No browser JavaScript exceptions",
+    "Playback made no mutating request",
+    "Static playback made no inference-service requests"
+  ],
+  "errors": [],
+  "package_manifest": {
+    "version": "0.5.2",
+    "live_run_id": "849fa2bcf3f348959a92c6e04e775c58",
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "files": {
+      "agent_code_validator-0.5.2-py3-none-any.whl": "1b3f902862db40b36d0d6a75a5120570b42853d3d86a31b023c55a5e6904198b",
+      "ci-gate.zip": "5a1860eb2f563e466ac7a0ecfa99202e5a2d9cc4c6eda933e9739506711d9a9f",
+      "index.html": "19be0b46aee8f2fdea1a06dd7afa47ef93aabe826812dfeffae8d2d2ae3015ed",
+      "launch_demo.py": "b524f0ccd976092a2199b71315dc4d0ff5c3261464b5a834270873d5336343a3",
+      "LICENSE": "d81391386dd9f0e453c7b42a129a6a2646e699c797ce3e3d38d7a6dc8271fe8e",
+      "manifest.json": "9a66865100b1ee4b79fb505ef82b05020cfd78b6b52d5bf3881103318e023936",
+      "repair.html": "7f60385c21d8555e8da2a333e3d48ba7a2e96836dd534ff7171c098c7891a590",
+      "report.json": "16a4d37d2f4117a9162f263c5217b3ba7f9a4d1c2d979075fd822f90a99270af",
+      "sdk-upgrade.html": "f52614498a2134811ac3f26052d14127fd4ca2c1743519a39a86b28d08efb450",
+      "START-HERE.txt": "6857fd496ee21b1dfde9dae33342e19ebd745c05b34342e39759eab590384da0",
+      "Start-Judge-Demo.cmd": "944cbb02422432fbf7a190e0e203852626fe6142f3943e55b4751f3d33ff999d",
+      "ci-gate/contract.json": "eb911d2a1d9f6214d1c09865a78c73af237482bebf0eb65401a8508b2f0ff8be",
+      "ci-gate/observed-candidate.json": "23b3d073e827ccfb8d7324ccba01cbbee7bbaf6a6b913c71f5c21dcc116bd048",
+      "ci-gate/REGRESSION-GATE.md": "e8b41e493be743b2efd3c42115c31575fc93f86b7563f5ae8d1bd942e53a6635",
+      "ci-gate/test_boundary_contract.py": "ca1a7ecf87fdfe8a9784f98c4527c7a436680bd813fea4f8586f7fc70eb4f26c",
+      "ci-gate/_patchcourt_contract/evidence.py": "17f6ade86c391d698826eb9ea12c85116efc2a53fa5b5d0a5ddc259b3727e5ef",
+      "ci-gate/_patchcourt_contract/LICENSE": "d81391386dd9f0e453c7b42a129a6a2646e699c797ce3e3d38d7a6dc8271fe8e",
+      "ci-gate/_patchcourt_contract/recording.py": "b50f09b5ab1d0b76e2841c4f76e10708348e93335b2cb1a483c80910092ff562",
+      "ci-gate/_patchcourt_contract/semantic.py": "d989d1b9258675e21604ec6415a58b9f1b0819260c53b37054b04a10545ae3b1",
+      "ci-gate/_patchcourt_contract/version_snapshot.py": "da96b7292b0e16213e710d1e5aaa42bab90bf5fe2decbe7fae6a13c460ea709f",
+      "evidence/ci-gate/manifest.json": "dee04c2becdf84adf85dbb02c4f42f0ed60a51781940249969f4e5bbda7fd722",
+      "evidence/ci-gate/report.json": "c90c83bebb7ed925c8d59dced9e24bc85475af1d4a18035d299d065803858750",
+      "evidence/live/manifest.json": "c84cd15d03381a9a214754612b3ac45862d9372f9ee71ba0e0e954d9570fe313",
+      "evidence/live/repair-proposal-1.json": "988d8c8cb0add2077a79f689a355e6aa6515680bc3e2fbe4882ae6c477bb69fb",
+      "evidence/live/report.json": "002186b4d166d2f915a98924f4bb08814825c0d859de36b3c4ebcca32159b291",
+      "evidence/live/task-turn-1.json": "f3f6597305d1471489eca389d12dbde166b570213f710fa4d99ed50948fa3310",
+      "evidence/live/task-turn-2.json": "e2c07c07aeeea5e2ae3c17cd7c441f831af143c83192f1f6f36692663b4f7c59"
+    },
+    "replay_only": true,
+    "new_provider_requests": 0
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "url": "/"
+    },
+    {
+      "method": "GET",
+      "url": "/repair.html"
+    },
+    {
+      "method": "GET",
+      "url": "/sdk-upgrade.html"
+    },
+    {
+      "method": "GET",
+      "url": "/agent_code_validator-0.5.2-py3-none-any.whl"
+    },
+    {
+      "method": "GET",
+      "url": "/evidence/live/report.json"
+    },
+    {
+      "method": "GET",
+      "url": "/ci-gate.zip"
+    },
+    {
+      "method": "GET",
+      "url": "/evidence/ci-gate/report.json"
+    },
+    {
+      "method": "GET",
+      "url": "/repair.html"
+    },
+    {
+      "method": "GET",
+      "url": "/favicon.ico"
+    },
+    {
+      "method": "GET",
+      "url": "/"
+    },
+    {
+      "method": "GET",
+      "url": "/sdk-upgrade.html"
+    },
+    {
+      "method": "GET",
+      "url": "/report.json"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "sha256": "bd5037b0b6c786cfacdadc8c95b330a54e7e673cbcf48e1512fccfe4d3b0da2f",
+  "duration_seconds": 96,
+  "visual_review": "PASS",
+  "scope": "Local no-voice English on-screen presentation reviewed against actual NVIDIA and MCP records; not a public upload.",
+  "presentation": "music-and-on-screen-english",
+  "english_on_screen_review": "PASS",
+  "platform_model_on_screen_review": "PASS"
+}

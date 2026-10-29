@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "version": "0.6.0",
+  "scope": "Distribution documentation metadata only: update repository URL in wheel long description; all Python and packaged resource bytes unchanged.",
+  "new_repository_url": "https://github.com/karurukaruru/ReviKnot",
+  "old_wheel_sha256": "d9cd3a6c47442b2e9a5d44279c1dcda3411e1a983d4e614cd0427f20f3d43446",
+  "wheel_sha256": "3c86ca36b003b7a71c5683ea7066cd98a8261cbd157256bb93978ab8a7016059",
+  "wheel_bytes": 182639,
+  "wheel_members": 57,
+  "wheel_changed_members": [
+    "reviknot-0.6.0.dist-info/METADATA",
+    "reviknot-0.6.0.dist-info/RECORD"
+  ],
+  "python_and_resource_members_unchanged": true,
+  "unchanged_members": 55,
+  "wheel_RECORD_all_entries_verified": true,
+  "wheel_CRC": "PASS",
+  "parsed_name": "reviknot",
+  "parsed_version": "0.6.0",
+  "requires_dist_unchanged": true,
+  "embedded_judge_wheel_sha256": "3c86ca36b003b7a71c5683ea7066cd98a8261cbd157256bb93978ab8a7016059",
+  "judge_package_manifest_sha256": "59a9feccf9a2d6b5093d5b2ad2b842acc373df6561551bc25cd28311a7d3ae6c",
+  "judge_zip_sha256": "93b05796dba9637cc1bb40d830e64d1aa8d8d8984de4672dbf3471cde49c0aaa",
+  "judge_zip_bytes": 363235,
+  "judge_zip_members": 58,
+  "judge_changed_members": [
+    "package-manifest.json",
+    "reviknot-0.6.0-py3-none-any.whl"
+  ],
+  "judge_manifest_and_archive_member_hashes": "PASS",
+  "judge_download_matches_main_wheel": true,
+  "original_external_wheel_unchanged": true,
+  "new_provider_requests": 0,
+  "published": false,
+  "isolated_smoke": {
+    "status": "PASS",
+    "installation": "Actual pip --no-deps --no-index --no-compile --target",
+    "cli": "Standard-library -I -S demo exited 0 from installed wheel only",
+    "mcp": {
+      "status": "PASS",
+      "installed_wheel_server_identity": "ReviKnot",
+      "tools": [
+        "check_recording",
+        "compare_recordings",
+        "export_regression_gate",
+        "inspect_boundary"
+      ],
+      "actual_tool_calls": 2,
+      "expected_statuses": [
+        "PASS",
+        "FAIL"
+      ],
+      "isolation": "subprocess -I and explicit installed-wheel site path, cwd outside source checkout",
+      "provider_requests": 0
+    },
+    "environment_note": "Initial restricted sandbox TEMP was inaccessible; explicit writable task TEMP allowed the same local install."
+  }
+}

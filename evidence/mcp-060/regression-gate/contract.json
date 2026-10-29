@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "kind": "captured-boundary-regression-contract",
+  "adapter": "refund-application-adapter",
+  "captured_version": "controlled-broken",
+  "request_id": "refund-R104",
+  "expected_input": [
+    {
+      "role": "system",
+      "content": "Prepare a refund draft. Preserve tool IDs, currency, nested policy arguments and approval requirements. Never send money."
+    },
+    {
+      "role": "user",
+      "content": "For order R104, draft a refund for the unopened headset. 商品未拆封。"
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "order-R104",
+          "type": "function",
+          "function": {
+            "name": "lookup_order",
+            "arguments": "{\"order_id\": \"R104\", \"include\": {\"line_items\": true, \"payment_credentials\": false}}"
+          }
+        },
+        {
+          "id": "policy-R104",
+          "type": "function",
+          "function": {
+            "name": "check_return_policy",
+            "arguments": "{\"order_id\": \"R104\", \"item\": \"headset\", \"condition\": {\"opened\": false}, \"reason\": \"商品未拆封\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "order-R104",
+      "content": "{\"order_id\": \"R104\", \"currency\": \"EUR\", \"items\": [{\"sku\": \"headset\", \"quantity\": 1, \"unit_price_cents\": 7990}, {\"sku\": \"charger\", \"quantity\": 2, \"unit_price_cents\": 2500}], \"total_paid_cents\": 12990}"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "policy-R104",
+      "content": "{\"eligible\": true, \"item\": \"headset\", \"requires_human_approval\": true}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"action\": \"refund_draft\", \"order_id\": \"R104\", \"currency\": \"EUR\", \"amount_cents\": 7990, \"requires_human_approval\": true}"
+    }
+  ],
+  "observed_status": "FAIL",
+  "runtime_files_sha256": {
+    "_patchcourt_contract/evidence.py": "17f6ade86c391d698826eb9ea12c85116efc2a53fa5b5d0a5ddc259b3727e5ef",
+    "_patchcourt_contract/LICENSE": "d81391386dd9f0e453c7b42a129a6a2646e699c797ce3e3d38d7a6dc8271fe8e",
+    "_patchcourt_contract/recording.py": "b50f09b5ab1d0b76e2841c4f76e10708348e93335b2cb1a483c80910092ff562",
+    "_patchcourt_contract/semantic.py": "80af50c6b21f862fcb549281f8980c614c8f2117a40871ed68a2aaff62b9bcda",
+    "_patchcourt_contract/version_snapshot.py": "11c8770af0c2472bfe4a767a8380b79a9693c06504018d14507b5df0eac176d3"
+  },
+  "observed_candidate_file_sha256": "19b18a2e90889c20f073fc77c8ed836d97c266e2de63ab0fb907d029832a1114",
+  "scope": "Checks captured messages, not future SDK execution; the source recording is user-supplied and is not independently authenticated"
+}

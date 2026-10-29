@@ -1,0 +1,9 @@
+{
+  "chunk_id": "chunk-0001",
+  "status": "FAIL",
+  "findings": [],
+  "response_file": "chunks/chunk-0001-response.json",
+  "response_sha256": "9678a6a560185511a4be80325d2789669ec99dcc7e0037215da66a7206f2e4ed",
+  "scope": "Unverified read-only model suggestions; no source or repair executed",
+  "reason": "Provider request did not succeed: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>"
+}

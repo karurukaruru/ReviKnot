@@ -1,0 +1,128 @@
+{
+  "version": "0.6.0",
+  "duration_seconds": 96,
+  "scope": "Authoritative on-screen English story and Chinese review translation. Music and effects only; no voiceover. MCP segment uses the actual local official-SDK client result, not a recorded editor session.",
+  "cues": [
+    {
+      "startMs": 0,
+      "endMs": 5000,
+      "en": "An SDK upgrade can break your agent\nwhile its tools still run.",
+      "zh": "SDK 升级后，即使工具仍能运行，Agent 也可能出错。"
+    },
+    {
+      "startMs": 5000,
+      "endMs": 8000,
+      "en": "ReviKnot checks the contract\nyour agent depends on.",
+      "zh": "ReviKnot 检查 Agent 所依赖的消息契约。"
+    },
+    {
+      "startMs": 8000,
+      "endMs": 13000,
+      "en": "Here, the adapter drops tool-call IDs.\nResults lose their matching requests.",
+      "zh": "这里的适配器丢失了工具调用 ID，导致结果无法匹配原始请求。"
+    },
+    {
+      "startMs": 13000,
+      "endMs": 17000,
+      "en": "Start with a reproducible failure\nagainst the original input contract.",
+      "zh": "先按原始输入契约，稳定复现失败。"
+    },
+    {
+      "startMs": 17000,
+      "endMs": 22000,
+      "en": "NVIDIA Nemotron proposes a bounded repair\non Nebius Token Factory.",
+      "zh": "NVIDIA Nemotron 在 Nebius Token Factory 上提出受限的修复方案。"
+    },
+    {
+      "startMs": 22000,
+      "endMs": 26000,
+      "en": "The proposal stays data.\nModel-written Python is never executed.",
+      "zh": "修复方案只是数据，不执行模型生成的 Python 代码。"
+    },
+    {
+      "startMs": 26000,
+      "endMs": 29000,
+      "en": "Independent checks decide\nwhether the repair is accepted.",
+      "zh": "修复是否被接受，由独立检查决定。"
+    },
+    {
+      "startMs": 29000,
+      "endMs": 33000,
+      "en": "Keep the IDs, names and arguments\nthat the agent needs to continue.",
+      "zh": "保留 Agent 继续执行所需的调用 ID、名称与参数。"
+    },
+    {
+      "startMs": 33000,
+      "endMs": 37000,
+      "en": "Eight checks cover multiple calls,\nnested data and legacy behavior.",
+      "zh": "八项检查覆盖多次调用、嵌套数据和旧版行为。"
+    },
+    {
+      "startMs": 37000,
+      "endMs": 41000,
+      "en": "Two broken outputs can agree.\nThe original input contract still decides.",
+      "zh": "两份同样损坏的输出也可能一致，因此仍须按原始输入契约判断。"
+    },
+    {
+      "startMs": 41000,
+      "endMs": 46000,
+      "en": "A deliberately corrupted repair must fail.\nThe model cannot approve its own work.",
+      "zh": "故意破坏的修复必须被拒绝，模型不能批准自己的工作。"
+    },
+    {
+      "startMs": 46000,
+      "endMs": 51000,
+      "en": "Real model calls use two local fixture tools.\nThis is a controlled message-contract test.",
+      "zh": "真实模型调用两个本地测试工具，用于检查受控的消息契约。"
+    },
+    {
+      "startMs": 51000,
+      "endMs": 56000,
+      "en": "Three items at seven each should return 21.\nA lost call ID breaks the agent's handoff.",
+      "zh": "三件商品、每件七元，应返回 21；丢失调用 ID 就会破坏 Agent 的交接。"
+    },
+    {
+      "startMs": 56000,
+      "endMs": 60000,
+      "en": "Preserve both calls and their IDs.\nThen check that the agent can finish.",
+      "zh": "保留两个调用及其 ID，再检查 Agent 能否完成任务。"
+    },
+    {
+      "startMs": 60000,
+      "endMs": 64000,
+      "en": "The model returns 21.\nThe result is independently checked.",
+      "zh": "模型返回 21，结果再经独立核对。"
+    },
+    {
+      "startMs": 64000,
+      "endMs": 70000,
+      "en": "Keep the model response, mapping,\nchecks and tool results together.",
+      "zh": "将模型响应、字段映射、检查和工具结果一起保存。"
+    },
+    {
+      "startMs": 70000,
+      "endMs": 78000,
+      "en": "Every request remains inspectable.\nThis film replays evidence without new API calls.",
+      "zh": "每次请求都可检查。本片回放已有证据，不产生新的 API 调用。"
+    },
+    {
+      "startMs": 78000,
+      "endMs": 85000,
+      "en": "Connect your coding agent through MCP.\nCheck a capture. Keep the regression test.",
+      "zh": "将你的编码 Agent 接入 MCP：检查捕获数据，保存回归测试。"
+    },
+    {
+      "startMs": 85000,
+      "endMs": 90000,
+      "en": "Catch silent SDK regressions before merge.\nKeep the evidence with your code.",
+      "zh": "在合并前发现静默的 SDK 回归，并将证据保留在代码旁。"
+    },
+    {
+      "startMs": 90000,
+      "endMs": 96000,
+      "placement": "finale",
+      "en": "ReviKnot · Fix. Verify. Restore.\nkaruru.top · GitHub · X @djkaruru",
+      "zh": "ReviKnot：修复、验证、恢复。博客 karuru.top；源码和 X 联系方式见片尾。"
+    }
+  ]
+}

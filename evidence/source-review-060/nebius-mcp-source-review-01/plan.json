@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "run_id": "95242027-60eb-4cee-a65d-a9a703eb66e3",
+  "mode": "source-review",
+  "provider": "nebius",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "files": [
+    {
+      "file": "mcp_server.py",
+      "language": "Python",
+      "characters": 20613,
+      "decoded_utf8_bytes": 20627,
+      "original_file_bytes": 20627,
+      "decoded_text_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587"
+    }
+  ],
+  "supported_extensions": {
+    ".py": "Python",
+    ".js": "JavaScript",
+    ".ts": "TypeScript",
+    ".java": "Java",
+    ".c": "C",
+    ".cpp": "C++",
+    ".h": "C/C++ Header",
+    ".go": "Go",
+    ".html": "HTML",
+    ".css": "CSS",
+    ".jsx": "JavaScript JSX",
+    ".tsx": "TypeScript TSX",
+    ".rs": "Rust"
+  },
+  "scan_warnings": [],
+  "planning": {
+    "context_tokens": 100000,
+    "max_output_tokens": 8192,
+    "max_chunks": 20,
+    "max_file_bytes": 8000000,
+    "request_byte_limit": 128000,
+    "protocol_margin": 2048,
+    "count_method": "complete serialized request UTF-8 bytes as conservative token upper bound; not an actual model tokenizer",
+    "source_truncated": false
+  },
+  "chunks": [
+    {
+      "chunk_id": "chunk-0001",
+      "status": "NOT_ATTEMPTED",
+      "input_file": "chunks/chunk-0001-input.json",
+      "input_sha256": "2a1e7bf96b91f66002ddc23cb3ad2eca5eb24ee1706baad5f47b519356e94c2b",
+      "analysis_file": "chunks/chunk-0001-analysis.json",
+      "request_bytes_upper_bound": 26738,
+      "reserved_context_upper_bound": 36978,
+      "fragments": [
+        {
+          "file": "mcp_server.py",
+          "language": "Python",
+          "source_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587",
+          "char_start": 0,
+          "char_end": 20613,
+          "characters": 20613,
+          "line_start": 1,
+          "line_end": 326,
+          "original_text_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587",
+          "sent_text_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587",
+          "source_redacted": false
+        }
+      ],
+      "findings": []
+    }
+  ]
+}

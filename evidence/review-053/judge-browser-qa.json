@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "product": "ReviKnot",
+  "version": "0.5.3",
+  "evidence": "actual saved Nebius NVIDIA workflow and installed SDK upgrade",
+  "provider": "nebius",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "run_id": "393c6aae548e40beb8a8c54a986faff0",
+  "report_raw_sha256": "370b136a85badad53124474e5f02f6318922831d7b4d5fd07f97a5ec9ec31634",
+  "launcher": {
+    "loopback_only": true,
+    "host_rejection": 403,
+    "unlisted_file_rejection": 404,
+    "unsupported_post_rejection": 501
+  },
+  "replay": {
+    "state": "REPLAY / PASS",
+    "answer": "21",
+    "after": "VERIFIED",
+    "checks": "8/8",
+    "mutation": "YES",
+    "calls": "4",
+    "tokens": "5,631",
+    "events": 13
+  },
+  "repair_checks": 8,
+  "sdk": {
+    "title": "ReviKnot — Compatibility evidence",
+    "notice": "Loaded ./report.json. SDK upgrade report · Environment and execution status shown below. No live model or provider verification.",
+    "upgrade": "langchain-nvidia-ai-endpoints · 1.4.3 → 1.5.0Both releases lose the tool calls.The baseline already fails. NEEDS_REVIEW does not mean passed, and these results do not establish a newly introduced upgrade regression. Both releases require investigation.NEEDS REVIEWBaseline release1.4.3FAILInput contractFAILSDK subprocessEXECUTEDEnvironment inventoryREADYTool calls preserved0 / 2 input callsDeterministic taskFAILCandidate release1.5.0FAILInput contractFAILSDK subprocessEXECUTEDEnvironment inventoryREADYTool calls preserved0 / 2 input callsDeterministic taskFAILEnvironment verification2 / 2 inventories READY. Source and dependency identities checked by the runner.Shared dependencies · MATCHED39 shared package versions match in the recorded inventories.Provider requests0 recorded · No model inference in this run.Scope: local SDK serializer execution. Recorded task replay is deterministic; no live provider behavior is established. Evidence is displayed as recorded, not independently authenticated.",
+    "cases": 1,
+    "run": "8170c723-d7fa-4db5-82b5-ddc6c2a0b8cb"
+  },
+  "provenance_tab_works": true,
+  "model_record_downloads_verified": 4,
+  "browser_requests": [
+    {
+      "url": "http://127.0.0.1:57276/repair.html",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:57276/favicon.ico",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:57276/sdk-upgrade.html",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:57276/report.json",
+      "method": "GET"
+    }
+  ],
+  "new_provider_requests": 0,
+  "external_browser_requests": 0,
+  "images": [
+    {
+      "file": "evidence/review-053/judge-browser-replay.png",
+      "sha256": "92247c1cc31068f41721e93ddc4a0e0b84c90dbd7bae6a90ab68a16e375cf0b1",
+      "bytes": 94014
+    },
+    {
+      "file": "evidence/review-053/judge-browser-sdk.png",
+      "sha256": "43b97303c8e1b8c8bc2bb3473fbdc2a0a7f50e2679b844385ea2b7a61111f787",
+      "bytes": 88810
+    }
+  ],
+  "scope": "Reduced motion removes editorial replay delays; the actual replay handler, rendered data and tabs are exercised."
+}

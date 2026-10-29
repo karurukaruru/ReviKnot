@@ -1,0 +1,166 @@
+{
+  "kind": "deterministic structured evidence compaction",
+  "deduplication_enabled": true,
+  "findings": [
+    {
+      "suggestion": {
+        "severity": "medium",
+        "category": "bug",
+        "file": "long_source_fixture.py",
+        "location": "2902-2904",
+        "problem": "mean_price divides by len(prices) without guarding against an empty list, causing ZeroDivisionError.",
+        "reason": "Calling mean_price([]) raises ZeroDivisionError at runtime; the inline comment explicitly acknowledges the unsafe empty-list case, so any caller passing an empty collection will crash.",
+        "suggestion": "Validate the input and raise a clear ValueError (or return None/0.0 per contract) when prices is empty, e.g. `if not prices: raise ValueError('prices must be non-empty')`."
+      },
+      "verification": "Unverified model suggestion; no code or repair executed",
+      "evidence_refs": [
+        {
+          "chunk_id": "chunk-0002",
+          "analysis_file": "chunks/chunk-0002-analysis.json",
+          "finding_index": 1
+        }
+      ]
+    },
+    {
+      "suggestion": {
+        "severity": "low",
+        "category": "maintainability",
+        "file": "long_source_fixture.py",
+        "location": "2696-2899",
+        "problem": "A large hardcoded literal dictionary of ~200+ sku_XXXXX entries with cycling values is embedded directly in the module.",
+        "reason": "This bulk data inflates the source file, is hard to review or diff, and mixes data with logic; any change requires editing code rather than a data file, and it obscures the actual functions in the module.",
+        "suggestion": "Move the SKU data to an external data file (JSON/CSV) or generate it programmatically, and load it at runtime; keep the module focused on logic."
+      },
+      "verification": "Unverified model suggestion; no code or repair executed",
+      "evidence_refs": [
+        {
+          "chunk_id": "chunk-0002",
+          "analysis_file": "chunks/chunk-0002-analysis.json",
+          "finding_index": 2
+        }
+      ]
+    },
+    {
+      "suggestion": {
+        "severity": "low",
+        "category": "code-quality",
+        "file": "long_source_fixture.py",
+        "location": "2902-2904",
+        "problem": "mean_price accepts any iterable but relies on sum() and len(), which fails for generators or one-shot iterators.",
+        "reason": "If a caller passes a generator, len() raises TypeError; the function's implicit contract (a sized sequence) is undocumented, leading to surprising failures.",
+        "suggestion": "Either document that a sized sequence is required, or materialize the input once (e.g. `prices = list(prices)`) before computing sum and length."
+      },
+      "verification": "Unverified model suggestion; no code or repair executed",
+      "evidence_refs": [
+        {
+          "chunk_id": "chunk-0002",
+          "analysis_file": "chunks/chunk-0002-analysis.json",
+          "finding_index": 3
+        }
+      ]
+    },
+    {
+      "suggestion": {
+        "severity": "info",
+        "category": "code-quality",
+        "file": "long_source_fixture.py",
+        "location": "2902-2904",
+        "problem": "mean_price lacks a docstring and type hints, and the inline comment describes test intent rather than behavior.",
+        "reason": "Without a documented contract (input type, empty-input behavior, return type), callers cannot know how to use it safely, and the comment referencing 'a review suggestion' is noise in production code.",
+        "suggestion": "Add a docstring and type hints (e.g. `def mean_price(prices: Sequence[float]) -> float:`), and remove or replace the meta-comment with a description of the actual behavior."
+      },
+      "verification": "Unverified model suggestion; no code or repair executed",
+      "evidence_refs": [
+        {
+          "chunk_id": "chunk-0002",
+          "analysis_file": "chunks/chunk-0002-analysis.json",
+          "finding_index": 4
+        }
+      ]
+    }
+  ],
+  "chunk_index": [
+    {
+      "chunk_id": "chunk-0001",
+      "status": "COMPLETE",
+      "input_file": "chunks/chunk-0001-input.json",
+      "analysis_file": "chunks/chunk-0001-analysis.json",
+      "fragments": [
+        {
+          "file": "long_source_fixture.py",
+          "language": "Python",
+          "source_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+          "char_start": 0,
+          "char_end": 59077,
+          "characters": 59077,
+          "line_start": 1,
+          "line_end": 2695,
+          "original_text_sha256": "a7ca60873d68248295402dfdcb75ce4a63f6be38ae97adcd4cb711431ef225c2",
+          "sent_text_sha256": "a7ca60873d68248295402dfdcb75ce4a63f6be38ae97adcd4cb711431ef225c2",
+          "source_redacted": false
+        }
+      ]
+    },
+    {
+      "chunk_id": "chunk-0002",
+      "status": "COMPLETE",
+      "input_file": "chunks/chunk-0002-input.json",
+      "analysis_file": "chunks/chunk-0002-analysis.json",
+      "fragments": [
+        {
+          "file": "long_source_fixture.py",
+          "language": "Python",
+          "source_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+          "char_start": 59077,
+          "char_end": 63833,
+          "characters": 4756,
+          "line_start": 2696,
+          "line_end": 2909,
+          "original_text_sha256": "3d7480720020177b5d95dce1f751ab4839b12dd8614694f10ab04672c96266ef",
+          "sent_text_sha256": "3d7480720020177b5d95dce1f751ab4839b12dd8614694f10ab04672c96266ef",
+          "source_redacted": false
+        }
+      ]
+    }
+  ],
+  "loss_audit": {
+    "source_before_review_summarized": false,
+    "raw_responses_deleted": false,
+    "original_chunk_findings_deleted": false,
+    "model_summary_requests": 0,
+    "only_exact_duplicate_suggestions_merged": true
+  },
+  "scope": "Compact structured findings and evidence references; all source and raw model evidence remain in the per-chunk files. Cross-chunk reasoning is limited.",
+  "status": "COMPLETE",
+  "coverage": [
+    {
+      "file": "long_source_fixture.py",
+      "language": "Python",
+      "characters": 63833,
+      "decoded_utf8_bytes": 63833,
+      "original_file_bytes": 63833,
+      "decoded_text_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+      "completed_characters": 63833,
+      "completed_ranges": [
+        {
+          "char_start": 0,
+          "char_end": 59077,
+          "line_start": 1,
+          "line_end": 2695,
+          "chunk_id": "chunk-0001"
+        },
+        {
+          "char_start": 59077,
+          "char_end": 63833,
+          "line_start": 2696,
+          "line_end": 2909,
+          "chunk_id": "chunk-0002"
+        }
+      ],
+      "unfinished_ranges": [],
+      "source_redacted": false,
+      "all_fragments_completed": true,
+      "completed_percent": 100.0
+    }
+  ]
+}

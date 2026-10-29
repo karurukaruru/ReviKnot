@@ -1,0 +1,119 @@
+[
+  {
+    "severity": "high",
+    "category": "bug",
+    "file": "p_efc7aa65bb0d73ed.json",
+    "location": "candidate[0].tool_calls[0].function.name",
+    "problem": "The candidate changes the tool function name from \"reserve\" to \"release\" while keeping the same tool_call_id and the same tool result ({\"reserved\":6}).",
+    "reason": "The tool result no longer corresponds to the invoked function; a consumer replaying this transcript would treat a release call as having returned a reservation payload, producing incorrect state or a mismatched tool-call/result pairing.",
+    "suggestion": "Ensure candidate transcripts keep the function name consistent with the tool result, or update the tool result to reflect the release semantics; add a validation check that tool_call_id/name pairs match their results."
+  },
+  {
+    "severity": "high",
+    "category": "bug",
+    "file": "p_d727cb8d3bb2802c.json",
+    "location": "candidate[1].tool_call_id",
+    "problem": "The tool result's tool_call_id is \"r_72\" but the preceding assistant tool_call id is \"r_71\", so the result is orphaned.",
+    "reason": "Any consumer that correlates tool results to calls by id will fail to match the result, causing dropped results, errors, or hallucinated tool outputs.",
+    "suggestion": "Keep tool_call_id values consistent between the assistant tool_call and the tool message; add a referential-integrity check in the fixture generator."
+  },
+  {
+    "severity": "medium",
+    "category": "bug",
+    "file": "p_0502c3e9af7863e2.json",
+    "location": "candidate[0].tool_calls[0].function.arguments",
+    "problem": "The tool arguments change \"active\":true to \"active\":1 (a number instead of a boolean) while the tool result stays {\"reserved\":6}.",
+    "reason": "Type drift in tool arguments can cause schema validation failures or different downstream behavior; the unchanged result masks the semantic difference, making the fixture misleading.",
+    "suggestion": "Preserve argument types across baseline/candidate, or update the tool result to reflect the changed input; validate tool arguments against the function schema."
+  },
+  {
+    "severity": "medium",
+    "category": "bug",
+    "file": "p_9e70c5925ddc1f50.json",
+    "location": "candidate[0]",
+    "problem": "The candidate uses role \"human\" instead of \"user\" and splits the content into two text parts, changing both the role vocabulary and the message structure.",
+    "reason": "Consumers expecting OpenAI-style roles (\"user\") will reject or mis-handle \"human\"; splitting text into multiple parts may also change tokenization or downstream concatenation behavior.",
+    "suggestion": "Normalize roles to a single canonical vocabulary and document whether multi-part text is equivalent to a single string; add a role-mapping layer if multiple dialects must be supported."
+  },
+  {
+    "severity": "medium",
+    "category": "bug",
+    "file": "p_dc1f0cb93cc9d385.json",
+    "location": "candidate[0]",
+    "problem": "The candidate uses role \"ai\" with a flattened tool_call shape (\"type\":\"tool_call\", top-level \"name\"/\"args\") instead of the OpenAI-style \"assistant\" role with nested function object and JSON-string arguments.",
+    "reason": "This is a different wire format; consumers that parse the baseline format will fail to read the candidate's tool calls, and args as an object vs. a JSON string is a silent incompatibility.",
+    "suggestion": "Keep a single canonical tool-call schema across fixtures, or explicitly model dialect conversion and test round-tripping between formats."
+  },
+  {
+    "severity": "medium",
+    "category": "bug",
+    "file": "p_cc5ad7265bbb61ff.json",
+    "location": "candidate[0].content",
+    "problem": "Assistant content changes from null to an empty array [].",
+    "reason": "null and [] are not equivalent for many consumers; code that checks `content is None` will behave differently than code that checks emptiness, potentially producing empty assistant turns or serialization differences.",
+    "suggestion": "Pick one canonical representation for empty assistant content and normalize at the boundary; add a test asserting equivalence semantics."
+  },
+  {
+    "severity": "medium",
+    "category": "bug",
+    "file": "p_9892da119441e243.json",
+    "location": "candidate[0].content[1].image_url.url",
+    "problem": "The image URL changes from gauge.png to other.png while the accompanying text still says \"Read gauge\".",
+    "reason": "The text and image are now inconsistent, which can produce misleading evaluation results if this fixture is used to test multimodal handling.",
+    "suggestion": "Keep the text and image referent consistent, or update the text to match the new image; document the intent of each multimodal fixture."
+  },
+  {
+    "severity": "low",
+    "category": "bug",
+    "file": "p_1484744e0f449f47.json",
+    "location": "baseline[0].tool_call_id",
+    "problem": "A tool message references tool_call_id \"absent_91\" with no preceding assistant tool_call in the transcript.",
+    "reason": "This is an orphaned tool result; strict consumers will error or drop it, and it is unclear whether this is intentional negative-test data.",
+    "suggestion": "If intentional, document it as a negative fixture; otherwise include the corresponding assistant tool_call or remove the orphan."
+  },
+  {
+    "severity": "low",
+    "category": "code-quality",
+    "file": "p_28089f6c8f5fe6c6.json",
+    "location": "candidate[0]",
+    "problem": "The candidate adds \"id\" and \"usage_metadata\" fields to a user message that the baseline lacks.",
+    "reason": "Extra fields on user messages are non-standard and may be rejected by strict schema validators or silently ignored, making the fixture's intent ambiguous.",
+    "suggestion": "Clarify whether these fields are expected to be preserved; if so, add them to the schema and test round-tripping; if not, remove them."
+  },
+  {
+    "severity": "low",
+    "category": "code-quality",
+    "file": "p_bbb2dfc5e6943f73.json",
+    "location": "candidate[0].content[1].image_url.detail",
+    "problem": "The candidate adds \"detail\":\"auto\" to the image_url object.",
+    "reason": "This is a provider-specific extension; consumers that don't support it may reject the message, and the fixture does not indicate whether this is expected to be a no-op.",
+    "suggestion": "Document provider-specific fields and add a normalization step that strips or defaults unknown fields before comparison."
+  },
+  {
+    "severity": "low",
+    "category": "code-quality",
+    "file": "p_5045d156e903081a.json",
+    "location": "baseline[0]",
+    "problem": "The assistant message has empty content \"\" together with a \"refusal\" field, and baseline and candidate are identical.",
+    "reason": "An identical baseline/candidate pair provides no signal for a differential test and may indicate a copy-paste fixture; the empty-string content plus refusal is also an ambiguous representation.",
+    "suggestion": "Either remove redundant identical fixtures or document them as control cases; standardize how refusals are represented (e.g., null content with refusal set)."
+  },
+  {
+    "severity": "info",
+    "category": "architecture",
+    "file": "p_0301ce19eae45d69.json",
+    "location": "candidate[0].content",
+    "problem": "The candidate reorders \"north/south\" to \"south/north\", which is a pure content change with no structural difference.",
+    "reason": "Without metadata describing the expected comparison outcome (equal/not-equal), it is unclear whether this fixture tests order sensitivity or is just noise.",
+    "suggestion": "Add an explicit expected-result field (e.g., \"expect_equal\": false) to each fixture so tests are self-describing and reviewable."
+  },
+  {
+    "severity": "info",
+    "category": "maintainability",
+    "file": "p_0502c3e9af7863e2.json",
+    "location": "whole file",
+    "problem": "Fixtures are stored as many small standalone JSON files with no shared schema or index, and several files duplicate the same reserve/release tool-call scenario.",
+    "reason": "Duplicated near-identical fixtures (p_0502..., p_d727..., p_dc1f..., p_efc7...) make it hard to see which dimension each one varies and increase maintenance cost when the schema changes.",
+    "suggestion": "Introduce a shared schema/validator and a manifest describing each fixture's varied dimension and expected outcome; consider generating variants programmatically from a base case."
+  }
+]

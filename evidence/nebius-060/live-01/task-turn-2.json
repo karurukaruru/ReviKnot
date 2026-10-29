@@ -1,0 +1,146 @@
+{
+  "provider": "nebius",
+  "endpoint": "https://api.tokenfactory.nebius.com/v1/chat/completions",
+  "timestamp": "2026-10-28T03:56:28.468692+00:00",
+  "request_kind": "model",
+  "http_attempted": true,
+  "provenance": "live HTTP attempt",
+  "status": "PASS",
+  "http_status": 200,
+  "latency_ms": 6985.0,
+  "usage": {
+    "completion_tokens": 330,
+    "prompt_tokens": 461,
+    "total_tokens": 791,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "cost_usd": null,
+  "cost_note": "Unknown; no pricing assumption or zero-cost claim",
+  "parameters": {
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use the provided tools to compute inventory value. Do not invent stock or price. Call both inventory and price for SKU A, in the same response if possible. After both tool results, return only JSON with sku and inventory_value."
+      },
+      {
+        "role": "user",
+        "content": "What is the inventory value of SKU A? Use inventory and price before calculating."
+      },
+      {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-992e78103ec1da7b",
+            "type": "function",
+            "function": {
+              "name": "inventory",
+              "arguments": "{\"sku\": \"A\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "content": "{\"quantity\": 3}",
+        "tool_call_id": "chatcmpl-tool-992e78103ec1da7b"
+      }
+    ],
+    "max_tokens": 2048,
+    "temperature": 0,
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "inventory",
+          "description": "Look up the quantity in stock for one SKU.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sku": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sku"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "price",
+          "description": "Look up the unit price for one SKU.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sku": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sku"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "tool_choice": "auto"
+  },
+  "request_id": "f8e1135e852fad0b2a491745ee979806",
+  "raw_response": "{\"id\":\"chatcmpl-9aa5787d-7139-4f17-a3c5-ee4a9fdb5a20\",\"choices\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"logprobs\":null,\"message\":{\"content\":null,\"refusal\":null,\"role\":\"assistant\",\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[{\"id\":\"chatcmpl-tool-b84e9c55f197e21c\",\"function\":{\"arguments\":\"{\\\"sku\\\": \\\"A\\\"}\",\"name\":\"price\"},\"type\":\"function\"}],\"reasoning\":\"Okay, the user is asking for the inventory value of SKU A. They mentioned using both inventory and price. I remember that inventory value is calculated by multiplying the quantity in stock by the unit price.\\n\\nFirst, I need to get the quantity for SKU A. I called the inventory tool with SKU A and got a response of 3. So the quantity is 3 units.\\n\\nNext, I need the unit price for SKU A. I should call the price tool with SKU A. Let me check if I have that information. The user hasn't provided it yet, so I need to make another tool call. \\n\\nWait, the user's instruction says to use both inventory and price before calculating. So I need to first get the inventory quantity, then get the price, and then multiply them. \\n\\nI already have the inventory result as 3. Now I need to call the price tool for SKU A. Let me generate the tool call for that. \\n\\nOnce I get the price, I can multiply it by 3 to get the inventory value. Then present the result in JSON format as specified. \\n\\nI should make sure that I don't assume any values. If the price tool returns a value, say 10, then the inventory value would be 3 * 10 = 30. But I need to wait for the actual price result before proceeding. \\n\\nSo the next step is to call the price tool for SKU A.\\n\"},\"stop_reason\":null,\"token_ids\":null,\"routed_experts\":null}],\"created\":1793159792,\"model\":\"nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B\",\"object\":\"chat.completion\",\"moderation\":null,\"service_tier\":null,\"system_fingerprint\":\"vllm-0.22.0-b08c96cd\",\"usage\":{\"completion_tokens\":330,\"prompt_tokens\":461,\"total_tokens\":791,\"completion_tokens_details\":null,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"prompt_text\":null,\"kv_transfer_params\":null}",
+  "response": {
+    "id": "chatcmpl-9aa5787d-7139-4f17-a3c5-ee4a9fdb5a20",
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": null,
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [
+            {
+              "id": "chatcmpl-tool-b84e9c55f197e21c",
+              "function": {
+                "arguments": "{\"sku\": \"A\"}",
+                "name": "price"
+              },
+              "type": "function"
+            }
+          ],
+          "reasoning": "Okay, the user is asking for the inventory value of SKU A. They mentioned using both inventory and price. I remember that inventory value is calculated by multiplying the quantity in stock by the unit price.\n\nFirst, I need to get the quantity for SKU A. I called the inventory tool with SKU A and got a response of 3. So the quantity is 3 units.\n\nNext, I need the unit price for SKU A. I should call the price tool with SKU A. Let me check if I have that information. The user hasn't provided it yet, so I need to make another tool call. \n\nWait, the user's instruction says to use both inventory and price before calculating. So I need to first get the inventory quantity, then get the price, and then multiply them. \n\nI already have the inventory result as 3. Now I need to call the price tool for SKU A. Let me generate the tool call for that. \n\nOnce I get the price, I can multiply it by 3 to get the inventory value. Then present the result in JSON format as specified. \n\nI should make sure that I don't assume any values. If the price tool returns a value, say 10, then the inventory value would be 3 * 10 = 30. But I need to wait for the actual price result before proceeding. \n\nSo the next step is to call the price tool for SKU A.\n"
+        },
+        "stop_reason": null,
+        "token_ids": null,
+        "routed_experts": null
+      }
+    ],
+    "created": 1793159792,
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "vllm-0.22.0-b08c96cd",
+    "usage": {
+      "completion_tokens": 330,
+      "prompt_tokens": 461,
+      "total_tokens": 791,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "prompt_logprobs": null,
+    "prompt_token_ids": null,
+    "prompt_text": null,
+    "kv_transfer_params": null
+  }
+}

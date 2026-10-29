@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "distribution": "reviknot",
+  "version": "0.5.3",
+  "wheel": "reviknot-0.5.3-py3-none-any.whl",
+  "wheel_sha256": "287b5500a70a9fa78704ea19d3510c075060ac03be0517a35ec52da69f2401ba",
+  "bytes": 178488,
+  "crc_verified": true,
+  "isolated_mode": [
+    "-I",
+    "-S"
+  ],
+  "isolated_sys_path_first": "D:\\nv\\PatchCourt-Handoff-0.3.2-20261025\\work\\outputs\\review-053\\wheel-final-unpacked",
+  "legacy_entry_retained": true,
+  "current_readme_embedded": true,
+  "isolated_offline_demo": {
+    "output": "D:\\nv\\PatchCourt-Handoff-0.3.2-20261025\\work\\outputs\\review-053\\wheel-final-offline-demo",
+    "summary": {
+      "pass": 3,
+      "fail": 11,
+      "inconclusive": 1,
+      "needs_review": 1
+    },
+    "live_inference": false
+  },
+  "expected_negative_fixtures_preserved": true,
+  "dependencies_downloaded": 0,
+  "new_provider_requests": 0
+}

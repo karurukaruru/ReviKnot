@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "kind": "boundary-recording",
+  "adapter": "refund-application-adapter",
+  "version": "controlled-corrupt",
+  "events": [
+    {
+      "stage": "framework_input",
+      "timestamp": "2026-10-28T04:23:27.455926+00:00",
+      "request_id": "refund-R104",
+      "payload": [
+        {
+          "role": "system",
+          "content": "Prepare a refund draft. Preserve tool IDs, currency, nested policy arguments and approval requirements. Never send money."
+        },
+        {
+          "role": "user",
+          "content": "For order R104, draft a refund for the unopened headset. 商品未拆封。"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "order-R104",
+              "type": "function",
+              "function": {
+                "name": "lookup_order",
+                "arguments": "{\"order_id\": \"R104\", \"include\": {\"line_items\": true, \"payment_credentials\": false}}"
+              }
+            },
+            {
+              "id": "policy-R104",
+              "type": "function",
+              "function": {
+                "name": "check_return_policy",
+                "arguments": "{\"order_id\": \"R104\", \"item\": \"headset\", \"condition\": {\"opened\": false}, \"reason\": \"商品未拆封\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "order-R104",
+          "content": "{\"order_id\": \"R104\", \"currency\": \"EUR\", \"items\": [{\"sku\": \"headset\", \"quantity\": 1, \"unit_price_cents\": 7990}, {\"sku\": \"charger\", \"quantity\": 2, \"unit_price_cents\": 2500}], \"total_paid_cents\": 12990}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "policy-R104",
+          "content": "{\"eligible\": true, \"item\": \"headset\", \"requires_human_approval\": true}"
+        },
+        {
+          "role": "assistant",
+          "content": "{\"action\": \"refund_draft\", \"order_id\": \"R104\", \"currency\": \"EUR\", \"amount_cents\": 7990, \"requires_human_approval\": true}"
+        }
+      ],
+      "payload_redacted": false
+    },
+    {
+      "stage": "adapter_output",
+      "timestamp": "2026-10-28T04:23:27.456927+00:00",
+      "request_id": "refund-R104",
+      "payload": [
+        {
+          "role": "system",
+          "content": "Prepare a refund draft. Preserve tool IDs, currency, nested policy arguments and approval requirements. Never send money."
+        },
+        {
+          "role": "user",
+          "content": "For order R104, draft a refund for the unopened headset. 商品未拆封。"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "order-R104",
+              "type": "function",
+              "function": {
+                "name": "lookup_order",
+                "arguments": "{\"order_id\": \"R104\", \"include\": {\"line_items\": true, \"payment_credentials\": false}}"
+              }
+            },
+            {
+              "id": "policy-R104",
+              "type": "function",
+              "function": {
+                "name": "check_return_policy",
+                "arguments": "{\"order_id\": \"R104\", \"item\": \"headset\", \"condition\": {\"opened\": 0}, \"reason\": \"商品未拆封\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "order-R104",
+          "content": "{\"order_id\": \"R104\", \"currency\": \"EUR\", \"items\": [{\"sku\": \"headset\", \"quantity\": 1, \"unit_price_cents\": 7990}, {\"sku\": \"charger\", \"quantity\": 2, \"unit_price_cents\": 2500}], \"total_paid_cents\": 12990}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "policy-R104",
+          "content": "{\"eligible\": true, \"item\": \"headset\", \"requires_human_approval\": true}"
+        },
+        {
+          "role": "assistant",
+          "content": "{\"action\": \"refund_draft\", \"order_id\": \"R104\", \"currency\": \"EUR\", \"amount_cents\": 7990, \"requires_human_approval\": true}"
+        }
+      ],
+      "payload_redacted": false
+    }
+  ]
+}

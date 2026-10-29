@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "version": "0.6.0",
+  "narration": false,
+  "viewer": "D:\\nv\\Nebius-NVIDIA-Hackathon_ReviKnot\\03_视频成片_Final-Video\\看片_Review.html",
+  "viewer_sha256": "a40fe5404e1d12223cc228025109ed53b5c481197ba9a391f166af5c55c65067",
+  "movie_sha256": "bd5037b0b6c786cfacdadc8c95b330a54e7e673cbcf48e1512fccfe4d3b0da2f",
+  "captions_sha256": "967617db545aa9d521b09c0b6bc12b83cacabbc3d46736785a993cd2153125b9",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "checks": {
+    "initial_metadata": {
+      "title": "ReviKnot 0.6.0 · 视频与中英对照",
+      "duration": 96,
+      "width": 1920,
+      "height": 1080,
+      "source": "file:///D:/nv/Nebius-NVIDIA-Hackathon_ReviKnot/03_%E8%A7%86%E9%A2%91%E6%88%90%E7%89%87_Final-Video/ReviKnot-96s-Demo.mp4",
+      "cues": 20,
+      "companionMode": "bilingual"
+    },
+    "text_at45": {
+      "en": "A deliberately corrupted repair must fail.\nThe model cannot approve its own work.",
+      "zh": "故意破坏的修复必须被拒绝，模型不能批准自己的工作。"
+    },
+    "muted_play": {
+      "start": 45,
+      "end": 45.510525,
+      "paused": true
+    },
+    "english_switch": {
+      "time": 45,
+      "source": "file:///D:/nv/Nebius-NVIDIA-Hackathon_ReviKnot/03_%E8%A7%86%E9%A2%91%E6%88%90%E7%89%87_Final-Video/ReviKnot-96s-Demo.mp4",
+      "paused": true,
+      "duration": 96,
+      "width": 1920,
+      "height": 1080,
+      "en": "A deliberately corrupted repair must fail.\nThe model cannot approve its own work.",
+      "zh": ""
+    },
+    "hidden_switch": {
+      "time": 45,
+      "source": "file:///D:/nv/Nebius-NVIDIA-Hackathon_ReviKnot/03_%E8%A7%86%E9%A2%91%E6%88%90%E7%89%87_Final-Video/ReviKnot-96s-Demo.mp4",
+      "paused": true,
+      "duration": 96,
+      "width": 1920,
+      "height": 1080,
+      "en": "",
+      "zh": ""
+    },
+    "bilingual_switch": {
+      "time": 45,
+      "source": "file:///D:/nv/Nebius-NVIDIA-Hackathon_ReviKnot/03_%E8%A7%86%E9%A2%91%E6%88%90%E7%89%87_Final-Video/ReviKnot-96s-Demo.mp4",
+      "paused": true,
+      "duration": 96,
+      "width": 1920,
+      "height": 1080,
+      "en": "A deliberately corrupted repair must fail.\nThe model cannot approve its own work.",
+      "zh": "故意破坏的修复必须被拒绝，模型不能批准自己的工作。"
+    },
+    "all_cue_midpoints": [
+      2.5,
+      6.5,
+      10.5,
+      15,
+      19.5,
+      24,
+      27.5,
+      31,
+      35,
+      39,
+      43.5,
+      48.5,
+      53.5,
+      58,
+      62,
+      67,
+      74,
+      81.5,
+      87.5,
+      93
+    ],
+    "x_link": "@djkaruru",
+    "blog_link": "karuru.top",
+    "repository_link": "GitHub",
+    "no_voice_controls": true
+  },
+  "browser_errors": [],
+  "blocked_remote_requests": [],
+  "scope": "Actual installed-Chrome native playback, seeking, text-language switching and every explanatory cue midpoint; one music/effects film, no new inference."
+}

@@ -1,0 +1,523 @@
+{
+  "status": "PASS",
+  "kind": "Official MCP SDK client over actual stdio subprocess",
+  "created_at": "2026-10-28T04:23:30.748167+00:00",
+  "python": "3.12.13",
+  "transport": "stdio",
+  "tools": [
+    "check_recording",
+    "compare_recordings",
+    "export_regression_gate",
+    "inspect_boundary"
+  ],
+  "workflow": [
+    {
+      "tool": "check_recording",
+      "arguments": {
+        "recording_path": "captures/broken.recording.json"
+      },
+      "result": {
+        "status": "FAIL",
+        "findings": [
+          {
+            "code": "ORPHAN_RESULT",
+            "path": "/3/tool_call_id",
+            "message": "Tool result lacks an earlier unmatched call"
+          },
+          {
+            "code": "ORPHAN_RESULT",
+            "path": "/4/tool_call_id",
+            "message": "Tool result lacks an earlier unmatched call"
+          },
+          {
+            "code": "SEMANTIC_CHANGE",
+            "path": "/2/tool_calls/0",
+            "expected": {
+              "id": "order-R104",
+              "name": "lookup_order",
+              "args": {
+                "order_id": "R104",
+                "include": {
+                  "line_items": true,
+                  "payment_credentials": false
+                }
+              }
+            },
+            "actual": null,
+            "message": "Observable message semantics changed"
+          },
+          {
+            "code": "SEMANTIC_CHANGE",
+            "path": "/2/tool_calls/1",
+            "expected": {
+              "id": "policy-R104",
+              "name": "check_return_policy",
+              "args": {
+                "order_id": "R104",
+                "item": "headset",
+                "condition": {
+                  "opened": false
+                },
+                "reason": "商品未拆封"
+              }
+            },
+            "actual": null,
+            "message": "Observable message semantics changed"
+          }
+        ],
+        "finding_count": 4,
+        "findings_truncated": false,
+        "finding_fields_truncated": false,
+        "input_contract": {
+          "status": "PASS",
+          "findings": [],
+          "finding_count": 0,
+          "findings_truncated": false,
+          "finding_fields_truncated": false
+        },
+        "recording_file_sha256": "5b8b707b2b8b9ac8952a25cf61889690e4f998fe62c7c6b60260768e58894c43",
+        "recording": {
+          "adapter": "refund-application-adapter",
+          "version": "controlled-broken",
+          "request_id": "refund-R104",
+          "payload_redacted": false
+        },
+        "provider_requests": 0,
+        "scope": "A selected user-supplied capture; producer provenance is not independently authenticated"
+      }
+    },
+    {
+      "tool": "check_recording",
+      "arguments": {
+        "recording_path": "captures/fixed.recording.json"
+      },
+      "result": {
+        "status": "PASS",
+        "findings": [],
+        "finding_count": 0,
+        "findings_truncated": false,
+        "finding_fields_truncated": false,
+        "input_contract": {
+          "status": "PASS",
+          "findings": [],
+          "finding_count": 0,
+          "findings_truncated": false,
+          "finding_fields_truncated": false
+        },
+        "recording_file_sha256": "f43b280cfb77f3f9d8bd23927863a7ad76479bf75027aaac8f20f159e4b418a8",
+        "recording": {
+          "adapter": "refund-application-adapter",
+          "version": "controlled-fixed",
+          "request_id": "refund-R104",
+          "payload_redacted": false
+        },
+        "provider_requests": 0,
+        "scope": "A selected user-supplied capture; producer provenance is not independently authenticated"
+      }
+    },
+    {
+      "tool": "inspect_boundary",
+      "arguments": {
+        "input_path": "captures/input.json",
+        "output_path": "captures/corrupt.messages.json"
+      },
+      "result": {
+        "status": "FAIL",
+        "findings": [
+          {
+            "code": "SEMANTIC_CHANGE",
+            "path": "/2/tool_calls/1/args/condition/opened",
+            "expected": false,
+            "actual": 0,
+            "message": "Observable message semantics changed"
+          }
+        ],
+        "finding_count": 1,
+        "findings_truncated": false,
+        "finding_fields_truncated": false,
+        "input_contract": {
+          "status": "PASS",
+          "findings": [],
+          "finding_count": 0,
+          "findings_truncated": false,
+          "finding_fields_truncated": false
+        },
+        "input_file_sha256": "2f32789e7d4a55453ca5678cd080c20e996f90d4840a469c982bbb884e910b1e",
+        "output_file_sha256": "e38076851e1b2e00c97b6d6bb95bf06d6b2e0942b0b979061a3fa2b6a4a2dd7f",
+        "provider_requests": 0,
+        "scope": "Checks supplied message semantics; no SDK or application is executed"
+      }
+    },
+    {
+      "tool": "compare_recordings",
+      "arguments": {
+        "baseline_path": "captures/broken.recording.json",
+        "candidate_path": "captures/broken.recording.json"
+      },
+      "result": {
+        "status": "NEEDS_REVIEW",
+        "findings": [
+          {
+            "code": "UNHEALTHY_BASELINE",
+            "path": "",
+            "message": "The baseline already fails its original input contract; equal outputs cannot establish compatibility"
+          }
+        ],
+        "finding_count": 1,
+        "findings_truncated": false,
+        "finding_fields_truncated": false,
+        "direction": "candidate_uncertain",
+        "contracts": {
+          "baseline": {
+            "status": "FAIL",
+            "findings": [
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/3/tool_call_id",
+                "message": "Tool result lacks an earlier unmatched call"
+              },
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/4/tool_call_id",
+                "message": "Tool result lacks an earlier unmatched call"
+              },
+              {
+                "code": "SEMANTIC_CHANGE",
+                "path": "/2/tool_calls/0",
+                "expected": {
+                  "id": "order-R104",
+                  "name": "lookup_order",
+                  "args": {
+                    "order_id": "R104",
+                    "include": {
+                      "line_items": true,
+                      "payment_credentials": false
+                    }
+                  }
+                },
+                "actual": null,
+                "message": "Observable message semantics changed"
+              },
+              {
+                "code": "SEMANTIC_CHANGE",
+                "path": "/2/tool_calls/1",
+                "expected": {
+                  "id": "policy-R104",
+                  "name": "check_return_policy",
+                  "args": {
+                    "order_id": "R104",
+                    "item": "headset",
+                    "condition": {
+                      "opened": false
+                    },
+                    "reason": "商品未拆封"
+                  }
+                },
+                "actual": null,
+                "message": "Observable message semantics changed"
+              }
+            ],
+            "finding_count": 4,
+            "findings_truncated": false,
+            "finding_fields_truncated": false
+          },
+          "candidate": {
+            "status": "FAIL",
+            "findings": [
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/3/tool_call_id",
+                "message": "Tool result lacks an earlier unmatched call"
+              },
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/4/tool_call_id",
+                "message": "Tool result lacks an earlier unmatched call"
+              },
+              {
+                "code": "SEMANTIC_CHANGE",
+                "path": "/2/tool_calls/0",
+                "expected": {
+                  "id": "order-R104",
+                  "name": "lookup_order",
+                  "args": {
+                    "order_id": "R104",
+                    "include": {
+                      "line_items": true,
+                      "payment_credentials": false
+                    }
+                  }
+                },
+                "actual": null,
+                "message": "Observable message semantics changed"
+              },
+              {
+                "code": "SEMANTIC_CHANGE",
+                "path": "/2/tool_calls/1",
+                "expected": {
+                  "id": "policy-R104",
+                  "name": "check_return_policy",
+                  "args": {
+                    "order_id": "R104",
+                    "item": "headset",
+                    "condition": {
+                      "opened": false
+                    },
+                    "reason": "商品未拆封"
+                  }
+                },
+                "actual": null,
+                "message": "Observable message semantics changed"
+              }
+            ],
+            "finding_count": 4,
+            "findings_truncated": false,
+            "finding_fields_truncated": false
+          },
+          "difference": {
+            "status": "NEEDS_REVIEW",
+            "findings": [
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/3/tool_call_id",
+                "message": "Invalid baseline: Tool result lacks an earlier unmatched call"
+              },
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/4/tool_call_id",
+                "message": "Invalid baseline: Tool result lacks an earlier unmatched call"
+              }
+            ],
+            "finding_count": 2,
+            "findings_truncated": false,
+            "finding_fields_truncated": false
+          }
+        },
+        "baseline": {
+          "version": "controlled-broken",
+          "request_id": "refund-R104",
+          "file_sha256": "5b8b707b2b8b9ac8952a25cf61889690e4f998fe62c7c6b60260768e58894c43"
+        },
+        "candidate": {
+          "version": "controlled-broken",
+          "request_id": "refund-R104",
+          "file_sha256": "5b8b707b2b8b9ac8952a25cf61889690e4f998fe62c7c6b60260768e58894c43"
+        },
+        "adapter": "refund-application-adapter",
+        "provider_requests": 0,
+        "scope": "Comparison of recorded evidence, with both outputs checked against the same original input; no SDK is executed"
+      }
+    },
+    {
+      "tool": "compare_recordings",
+      "arguments": {
+        "baseline_path": "captures/broken.recording.json",
+        "candidate_path": "captures/fixed.recording.json"
+      },
+      "result": {
+        "status": "NEEDS_REVIEW",
+        "findings": [
+          {
+            "code": "UNHEALTHY_BASELINE",
+            "path": "",
+            "message": "The baseline already fails its original input contract; equal outputs cannot establish compatibility"
+          }
+        ],
+        "finding_count": 1,
+        "findings_truncated": false,
+        "finding_fields_truncated": false,
+        "direction": "candidate_restores_contract",
+        "contracts": {
+          "baseline": {
+            "status": "FAIL",
+            "findings": [
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/3/tool_call_id",
+                "message": "Tool result lacks an earlier unmatched call"
+              },
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/4/tool_call_id",
+                "message": "Tool result lacks an earlier unmatched call"
+              },
+              {
+                "code": "SEMANTIC_CHANGE",
+                "path": "/2/tool_calls/0",
+                "expected": {
+                  "id": "order-R104",
+                  "name": "lookup_order",
+                  "args": {
+                    "order_id": "R104",
+                    "include": {
+                      "line_items": true,
+                      "payment_credentials": false
+                    }
+                  }
+                },
+                "actual": null,
+                "message": "Observable message semantics changed"
+              },
+              {
+                "code": "SEMANTIC_CHANGE",
+                "path": "/2/tool_calls/1",
+                "expected": {
+                  "id": "policy-R104",
+                  "name": "check_return_policy",
+                  "args": {
+                    "order_id": "R104",
+                    "item": "headset",
+                    "condition": {
+                      "opened": false
+                    },
+                    "reason": "商品未拆封"
+                  }
+                },
+                "actual": null,
+                "message": "Observable message semantics changed"
+              }
+            ],
+            "finding_count": 4,
+            "findings_truncated": false,
+            "finding_fields_truncated": false
+          },
+          "candidate": {
+            "status": "PASS",
+            "findings": [],
+            "finding_count": 0,
+            "findings_truncated": false,
+            "finding_fields_truncated": false
+          },
+          "difference": {
+            "status": "NEEDS_REVIEW",
+            "findings": [
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/3/tool_call_id",
+                "message": "Invalid baseline: Tool result lacks an earlier unmatched call"
+              },
+              {
+                "code": "ORPHAN_RESULT",
+                "path": "/4/tool_call_id",
+                "message": "Invalid baseline: Tool result lacks an earlier unmatched call"
+              }
+            ],
+            "finding_count": 2,
+            "findings_truncated": false,
+            "finding_fields_truncated": false
+          }
+        },
+        "baseline": {
+          "version": "controlled-broken",
+          "request_id": "refund-R104",
+          "file_sha256": "5b8b707b2b8b9ac8952a25cf61889690e4f998fe62c7c6b60260768e58894c43"
+        },
+        "candidate": {
+          "version": "controlled-fixed",
+          "request_id": "refund-R104",
+          "file_sha256": "f43b280cfb77f3f9d8bd23927863a7ad76479bf75027aaac8f20f159e4b418a8"
+        },
+        "adapter": "refund-application-adapter",
+        "provider_requests": 0,
+        "scope": "Comparison of recorded evidence, with both outputs checked against the same original input; no SDK is executed"
+      }
+    },
+    {
+      "tool": "export_regression_gate",
+      "arguments": {
+        "recording_path": "captures/broken.recording.json",
+        "output_dir": "regression-gate"
+      },
+      "result": {
+        "status": "EXPORTED",
+        "observed_status": "FAIL",
+        "output_dir": "regression-gate",
+        "recording_file_sha256": "5b8b707b2b8b9ac8952a25cf61889690e4f998fe62c7c6b60260768e58894c43",
+        "regression_gate": {
+          "status": "EXPORTED",
+          "default_candidate_status": "FAIL",
+          "default_test_expected": "FAIL",
+          "standalone_standard_library": true,
+          "runtime_files_sha256": {
+            "_patchcourt_contract/evidence.py": "17f6ade86c391d698826eb9ea12c85116efc2a53fa5b5d0a5ddc259b3727e5ef",
+            "_patchcourt_contract/LICENSE": "d81391386dd9f0e453c7b42a129a6a2646e699c797ce3e3d38d7a6dc8271fe8e",
+            "_patchcourt_contract/recording.py": "b50f09b5ab1d0b76e2841c4f76e10708348e93335b2cb1a483c80910092ff562",
+            "_patchcourt_contract/semantic.py": "80af50c6b21f862fcb549281f8980c614c8f2117a40871ed68a2aaff62b9bcda",
+            "_patchcourt_contract/version_snapshot.py": "11c8770af0c2472bfe4a767a8380b79a9693c06504018d14507b5df0eac176d3"
+          },
+          "contract_file_sha256": "aee186d1bafa43ccab8926bfe9da2fab52d69c13a295a18ae9b6c0ea7c7a00f8",
+          "test_file_sha256": "995b16cef03bb877b560e940452ace810af99fdcaf867f1f133e4a85b5eb7286",
+          "download_file": "regression-gate.zip",
+          "archive_sha256": "24fb0e9c62a5a9f24e97df181848142c79343ea55e8e4fd81223a6d0d578334e"
+        },
+        "provider_requests": 0,
+        "run_argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "regression-gate",
+          "-p",
+          "test_boundary_contract.py"
+        ],
+        "run_from": "configured workspace",
+        "scope": "Standard-library gate for a frozen captured input. A broken observed candidate intentionally fails; this tool does not run the test or a future SDK"
+      }
+    }
+  ],
+  "gate_tests": [
+    {
+      "candidate": "broken",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "passed": true
+    },
+    {
+      "candidate": "fixed",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "passed": true
+    },
+    {
+      "candidate": "corrupt",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "passed": true
+    }
+  ],
+  "path_escape_rejected": true,
+  "provider_requests": 0,
+  "scope": "Controlled refund-agent application adapter; local data, no payment, model or arbitrary application execution. MCP host initiates tools; no background polling or autonomous editor trigger is claimed.",
+  "execution": {
+    "reviknot_version": "0.6.0",
+    "mcp_sdk_version": "2.3.0",
+    "mcp_server_source_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587",
+    "workflow_script_sha256": "363b5e7166f665a35dadafc3befcfeb1858c8c3482c0e1db8740fbca7ceed6dc",
+    "refund_example_source_sha256": "51da7fa5c38c61f224e99f3515a4a57eaa222e114291242418ec6bf764289e35"
+  },
+  "excluded_files": "Derived __pycache__/*.pyc runtime caches are not evidence inputs.",
+  "files": {
+    "gate-broken.log": "031c95f4e3bc7d82dbb4d33dabc9cd3b7f0bd40bdf8b463bd897a46f8569b457",
+    "gate-corrupt.log": "3a5f1de73cfbefd8f4bc815c8148b380ddabcbc9a798c46608a9967db8805ee1",
+    "gate-fixed.log": "194d636cc06ae142f2f635380d32491e4a766a9266658f59d7d6546e39491e74",
+    "captures/broken.messages.json": "19b18a2e90889c20f073fc77c8ed836d97c266e2de63ab0fb907d029832a1114",
+    "captures/broken.recording.json": "5b8b707b2b8b9ac8952a25cf61889690e4f998fe62c7c6b60260768e58894c43",
+    "captures/capture-summary.json": "1fa98f5dee8ba3e46be02de845de106ec24e58a77851a199bb8b93d8cff0149f",
+    "captures/corrupt.messages.json": "e38076851e1b2e00c97b6d6bb95bf06d6b2e0942b0b979061a3fa2b6a4a2dd7f",
+    "captures/corrupt.recording.json": "e1495f5ee86b24e018461dc92ce3948b3b2eb6dc740f39a4c046031662aad3c8",
+    "captures/fixed.messages.json": "2f32789e7d4a55453ca5678cd080c20e996f90d4840a469c982bbb884e910b1e",
+    "captures/fixed.recording.json": "f43b280cfb77f3f9d8bd23927863a7ad76479bf75027aaac8f20f159e4b418a8",
+    "captures/input.json": "2f32789e7d4a55453ca5678cd080c20e996f90d4840a469c982bbb884e910b1e",
+    "regression-gate/contract.json": "aee186d1bafa43ccab8926bfe9da2fab52d69c13a295a18ae9b6c0ea7c7a00f8",
+    "regression-gate/observed-candidate.json": "19b18a2e90889c20f073fc77c8ed836d97c266e2de63ab0fb907d029832a1114",
+    "regression-gate/REGRESSION-GATE.md": "26d93e0dde55dfa5c673c752bcd66bd66f7ed777880e710708aa488b5b1503bf",
+    "regression-gate/regression-gate.zip": "24fb0e9c62a5a9f24e97df181848142c79343ea55e8e4fd81223a6d0d578334e",
+    "regression-gate/test_boundary_contract.py": "995b16cef03bb877b560e940452ace810af99fdcaf867f1f133e4a85b5eb7286",
+    "regression-gate/_patchcourt_contract/evidence.py": "17f6ade86c391d698826eb9ea12c85116efc2a53fa5b5d0a5ddc259b3727e5ef",
+    "regression-gate/_patchcourt_contract/LICENSE": "d81391386dd9f0e453c7b42a129a6a2646e699c797ce3e3d38d7a6dc8271fe8e",
+    "regression-gate/_patchcourt_contract/recording.py": "b50f09b5ab1d0b76e2841c4f76e10708348e93335b2cb1a483c80910092ff562",
+    "regression-gate/_patchcourt_contract/semantic.py": "80af50c6b21f862fcb549281f8980c614c8f2117a40871ed68a2aaff62b9bcda",
+    "regression-gate/_patchcourt_contract/version_snapshot.py": "11c8770af0c2472bfe4a767a8380b79a9693c06504018d14507b5df0eac176d3"
+  }
+}

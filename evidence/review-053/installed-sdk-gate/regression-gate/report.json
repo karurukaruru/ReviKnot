@@ -1,0 +1,300 @@
+{
+  "schema_version": "1.0",
+  "run_id": "6cbec315-d67a-444d-9c0a-7e461f8297b5",
+  "created_at": "2026-10-27T10:41:21.823366+00:00",
+  "mode": "recording-check",
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "patchcourt": "0.5.3"
+  },
+  "summary": {
+    "pass": 0,
+    "fail": 1,
+    "inconclusive": 0,
+    "needs_review": 0
+  },
+  "cases": [
+    {
+      "id": "captured-boundary",
+      "title": "langchain-nvidia-ai-endpoints/convert_message_to_dict / sdk-contract-1",
+      "status": "FAIL",
+      "findings": [
+        {
+          "code": "ORPHAN_RESULT",
+          "path": "/1/tool_call_id",
+          "message": "Tool result lacks an earlier unmatched call"
+        },
+        {
+          "code": "ORPHAN_RESULT",
+          "path": "/2/tool_call_id",
+          "message": "Tool result lacks an earlier unmatched call"
+        },
+        {
+          "code": "SEMANTIC_CHANGE",
+          "path": "/0/tool_calls/0",
+          "expected": {
+            "id": "call_a",
+            "name": "inventory",
+            "args": {
+              "sku": "A",
+              "options": {
+                "warehouse": 2
+              }
+            }
+          },
+          "actual": null,
+          "message": "Observable message semantics changed"
+        },
+        {
+          "code": "SEMANTIC_CHANGE",
+          "path": "/0/tool_calls/1",
+          "expected": {
+            "id": "call_b",
+            "name": "price",
+            "args": {
+              "sku": "A"
+            }
+          },
+          "actual": null,
+          "message": "Observable message semantics changed"
+        }
+      ],
+      "baseline": [
+        {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_a",
+              "type": "function",
+              "function": {
+                "name": "inventory",
+                "arguments": "{\"sku\":\"A\",\"options\":{\"warehouse\":2}}"
+              }
+            },
+            {
+              "id": "call_b",
+              "type": "function",
+              "function": {
+                "name": "price",
+                "arguments": "{\"sku\":\"A\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_a",
+          "content": "{\"quantity\":3}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_b",
+          "content": "{\"price\":7}"
+        }
+      ],
+      "candidate": [
+        {
+          "role": "assistant",
+          "content": ""
+        },
+        {
+          "role": "tool",
+          "content": "{\"quantity\":3}",
+          "tool_call_id": "call_a"
+        },
+        {
+          "role": "tool",
+          "content": "{\"price\":7}",
+          "tool_call_id": "call_b"
+        }
+      ],
+      "contracts": {
+        "input": {
+          "status": "PASS",
+          "findings": []
+        },
+        "baseline": {
+          "status": "PASS",
+          "findings": []
+        },
+        "candidate": {
+          "status": "FAIL",
+          "findings": [
+            {
+              "code": "ORPHAN_RESULT",
+              "path": "/1/tool_call_id",
+              "message": "Tool result lacks an earlier unmatched call"
+            },
+            {
+              "code": "ORPHAN_RESULT",
+              "path": "/2/tool_call_id",
+              "message": "Tool result lacks an earlier unmatched call"
+            },
+            {
+              "code": "SEMANTIC_CHANGE",
+              "path": "/0/tool_calls/0",
+              "expected": {
+                "id": "call_a",
+                "name": "inventory",
+                "args": {
+                  "sku": "A",
+                  "options": {
+                    "warehouse": 2
+                  }
+                }
+              },
+              "actual": null,
+              "message": "Observable message semantics changed"
+            },
+            {
+              "code": "SEMANTIC_CHANGE",
+              "path": "/0/tool_calls/1",
+              "expected": {
+                "id": "call_b",
+                "name": "price",
+                "args": {
+                  "sku": "A"
+                }
+              },
+              "actual": null,
+              "message": "Observable message semantics changed"
+            }
+          ]
+        },
+        "difference": {
+          "status": "FAIL",
+          "findings": [
+            {
+              "code": "ORPHAN_RESULT",
+              "path": "/1/tool_call_id",
+              "message": "Tool result lacks an earlier unmatched call"
+            },
+            {
+              "code": "ORPHAN_RESULT",
+              "path": "/2/tool_call_id",
+              "message": "Tool result lacks an earlier unmatched call"
+            },
+            {
+              "code": "SEMANTIC_CHANGE",
+              "path": "/0/tool_calls/0",
+              "expected": {
+                "id": "call_a",
+                "name": "inventory",
+                "args": {
+                  "sku": "A",
+                  "options": {
+                    "warehouse": 2
+                  }
+                }
+              },
+              "actual": null,
+              "message": "Observable message semantics changed"
+            },
+            {
+              "code": "SEMANTIC_CHANGE",
+              "path": "/0/tool_calls/1",
+              "expected": {
+                "id": "call_b",
+                "name": "price",
+                "args": {
+                  "sku": "A"
+                }
+              },
+              "actual": null,
+              "message": "Observable message semantics changed"
+            }
+          ]
+        }
+      },
+      "execution": false,
+      "provenance": {
+        "kind": "User-supplied opt-in BoundaryRecorder transaction; no SDK is executed by this check",
+        "adapter": "langchain-nvidia-ai-endpoints/convert_message_to_dict",
+        "version": "1.4.3",
+        "request_id": "sdk-contract-1",
+        "recording_sha256": "c7c580577b6ee18772667282aa59b86c87bf6d383097e9c911a760414ad64550",
+        "timestamps": {
+          "input": "2026-10-27T10:41:21.426175+00:00",
+          "output": "2026-10-27T10:41:21.426175+00:00"
+        },
+        "event_indexes": [
+          0,
+          1
+        ]
+      }
+    }
+  ],
+  "knowledge": {},
+  "lab": {
+    "status": "BLOCKED",
+    "live_requests": 0,
+    "reason": "Offline execution; credentials and live platform behavior are not evaluated here"
+  },
+  "limitations": [
+    "Checks a selected captured message pair without executing an SDK or application.",
+    "A saved recording and its checksums do not independently authenticate its producer.",
+    "A future regression gate requires a freshly captured candidate trace or recording."
+  ],
+  "status": "FAIL",
+  "input": [
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_a",
+          "type": "function",
+          "function": {
+            "name": "inventory",
+            "arguments": "{\"sku\":\"A\",\"options\":{\"warehouse\":2}}"
+          }
+        },
+        {
+          "id": "call_b",
+          "type": "function",
+          "function": {
+            "name": "price",
+            "arguments": "{\"sku\":\"A\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_a",
+      "content": "{\"quantity\":3}"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_b",
+      "content": "{\"price\":7}"
+    }
+  ],
+  "provider_requests": 0,
+  "recording": {
+    "adapter": "langchain-nvidia-ai-endpoints/convert_message_to_dict",
+    "version": "1.4.3",
+    "request_id": "sdk-contract-1",
+    "recording_event_count": 2,
+    "payload_redacted": false
+  },
+  "regression_gate": {
+    "status": "EXPORTED",
+    "default_candidate_status": "FAIL",
+    "default_test_expected": "FAIL",
+    "standalone_standard_library": true,
+    "runtime_files_sha256": {
+      "_patchcourt_contract/evidence.py": "17f6ade86c391d698826eb9ea12c85116efc2a53fa5b5d0a5ddc259b3727e5ef",
+      "_patchcourt_contract/LICENSE": "d81391386dd9f0e453c7b42a129a6a2646e699c797ce3e3d38d7a6dc8271fe8e",
+      "_patchcourt_contract/recording.py": "b50f09b5ab1d0b76e2841c4f76e10708348e93335b2cb1a483c80910092ff562",
+      "_patchcourt_contract/semantic.py": "80af50c6b21f862fcb549281f8980c614c8f2117a40871ed68a2aaff62b9bcda",
+      "_patchcourt_contract/version_snapshot.py": "0df98c19bd905c6423dbfa107f3bc3dad70977fe7206b0f5372f2bd77ea16da7"
+    },
+    "contract_file_sha256": "38bb1e2be58bf01369abc57f7973f2c0aec15567fd3e4f80f8bea2eae48a2296",
+    "test_file_sha256": "3461e33ce054150ac875fc6795825195c4a89552de7b06c2fa49e20eaa743f14",
+    "download_file": "regression-gate.zip",
+    "archive_sha256": "a861e1842da7de413090ce4d67f0cb37a8cb9f238a04e42a34a4211f4583bfc0"
+  }
+}

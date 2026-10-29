@@ -1,0 +1,146 @@
+{
+  "provider": "nebius",
+  "endpoint": "https://api.tokenfactory.nebius.com/v1/chat/completions",
+  "timestamp": "2026-10-27T10:01:26.436016+00:00",
+  "request_kind": "model",
+  "http_attempted": true,
+  "provenance": "live HTTP attempt",
+  "status": "PASS",
+  "http_status": 200,
+  "latency_ms": 2094.0,
+  "usage": {
+    "completion_tokens": 172,
+    "prompt_tokens": 461,
+    "total_tokens": 633,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "cost_usd": null,
+  "cost_note": "Unknown; no pricing assumption or zero-cost claim",
+  "parameters": {
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use the provided tools to compute inventory value. Do not invent stock or price. Call both inventory and price for SKU A, in the same response if possible. After both tool results, return only JSON with sku and inventory_value."
+      },
+      {
+        "role": "user",
+        "content": "What is the inventory value of SKU A? Use inventory and price before calculating."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-adbd3d2368a3a10e",
+            "type": "function",
+            "function": {
+              "name": "inventory",
+              "arguments": "{\"sku\": \"A\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "content": "{\"quantity\": 3}",
+        "tool_call_id": "chatcmpl-tool-adbd3d2368a3a10e"
+      }
+    ],
+    "max_tokens": 2048,
+    "temperature": 0,
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "inventory",
+          "description": "Look up the quantity in stock for one SKU.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sku": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sku"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "price",
+          "description": "Look up the unit price for one SKU.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "sku": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sku"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "tool_choice": "auto"
+  },
+  "request_id": "d32a71cfc8bc1d8623bd26910ed10e9e",
+  "raw_response": "{\"id\":\"chatcmpl-19608ab7-6e51-4bf8-8ee8-1a1d11bb3fba\",\"choices\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"logprobs\":null,\"message\":{\"content\":null,\"refusal\":null,\"role\":\"assistant\",\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[{\"id\":\"chatcmpl-tool-9d961b1cc19efa80\",\"function\":{\"arguments\":\"{\\\"sku\\\": \\\"A\\\"}\",\"name\":\"price\"},\"type\":\"function\"}],\"reasoning\":\"Okay, the user is asking for the inventory value of SKU A. They mentioned using both inventory and price, so I need to get both the quantity and the unit price.\\n\\nFirst, I already called the inventory tool for SKU A and got a quantity of 3. Now I need to get the price. Let me call the price tool with SKU A.\\n\\nOnce I have both values, I'll multiply them to get the inventory value. Then, I should return the result in a JSON format with sku and inventory_value. Let me make sure I don't miss any steps here. The user wants the calculation done using both tools, so I can't skip either. Alright, let's get the price now.\\n\"},\"stop_reason\":null,\"token_ids\":null,\"routed_experts\":null}],\"created\":1793095286,\"model\":\"nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B\",\"object\":\"chat.completion\",\"moderation\":null,\"service_tier\":null,\"system_fingerprint\":\"vllm-0.22.0-b08c96cd\",\"usage\":{\"completion_tokens\":172,\"prompt_tokens\":461,\"total_tokens\":633,\"completion_tokens_details\":null,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"prompt_text\":null,\"kv_transfer_params\":null}",
+  "response": {
+    "id": "chatcmpl-19608ab7-6e51-4bf8-8ee8-1a1d11bb3fba",
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": null,
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [
+            {
+              "id": "chatcmpl-tool-9d961b1cc19efa80",
+              "function": {
+                "arguments": "{\"sku\": \"A\"}",
+                "name": "price"
+              },
+              "type": "function"
+            }
+          ],
+          "reasoning": "Okay, the user is asking for the inventory value of SKU A. They mentioned using both inventory and price, so I need to get both the quantity and the unit price.\n\nFirst, I already called the inventory tool for SKU A and got a quantity of 3. Now I need to get the price. Let me call the price tool with SKU A.\n\nOnce I have both values, I'll multiply them to get the inventory value. Then, I should return the result in a JSON format with sku and inventory_value. Let me make sure I don't miss any steps here. The user wants the calculation done using both tools, so I can't skip either. Alright, let's get the price now.\n"
+        },
+        "stop_reason": null,
+        "token_ids": null,
+        "routed_experts": null
+      }
+    ],
+    "created": 1793095286,
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "vllm-0.22.0-b08c96cd",
+    "usage": {
+      "completion_tokens": 172,
+      "prompt_tokens": 461,
+      "total_tokens": 633,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "prompt_logprobs": null,
+    "prompt_token_ids": null,
+    "prompt_text": null,
+    "kv_transfer_params": null
+  }
+}

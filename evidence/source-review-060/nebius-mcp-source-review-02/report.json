@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "run_id": "42f37fc2-2e28-48ec-8f14-9f6d818d5c0e",
+  "created_at": "2026-10-28T04:32:24.066741+00:00",
+  "mode": "source-review",
+  "status": "COMPLETE",
+  "provider": "nebius",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "dry_run": false,
+  "source_characters": 20613,
+  "files": [
+    {
+      "file": "mcp_server.py",
+      "language": "Python",
+      "characters": 20613,
+      "decoded_utf8_bytes": 20627,
+      "original_file_bytes": 20627,
+      "decoded_text_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587"
+    }
+  ],
+  "supported_extensions": {
+    ".py": "Python",
+    ".js": "JavaScript",
+    ".ts": "TypeScript",
+    ".java": "Java",
+    ".c": "C",
+    ".cpp": "C++",
+    ".h": "C/C++ Header",
+    ".go": "Go",
+    ".html": "HTML",
+    ".css": "CSS",
+    ".jsx": "JavaScript JSX",
+    ".tsx": "TypeScript TSX",
+    ".rs": "Rust"
+  },
+  "scan_warnings": [],
+  "planning": {
+    "context_tokens": 100000,
+    "max_output_tokens": 8192,
+    "max_chunks": 20,
+    "max_file_bytes": 8000000,
+    "request_byte_limit": 128000,
+    "protocol_margin": 2048,
+    "count_method": "complete serialized request UTF-8 bytes as conservative token upper bound; not an actual model tokenizer",
+    "source_truncated": false
+  },
+  "chunks": [
+    {
+      "chunk_id": "chunk-0001",
+      "status": "COMPLETE",
+      "input_file": "chunks/chunk-0001-input.json",
+      "input_sha256": "2a1e7bf96b91f66002ddc23cb3ad2eca5eb24ee1706baad5f47b519356e94c2b",
+      "analysis_file": "chunks/chunk-0001-analysis.json",
+      "request_bytes_upper_bound": 26738,
+      "reserved_context_upper_bound": 36978,
+      "fragments": [
+        {
+          "file": "mcp_server.py",
+          "language": "Python",
+          "source_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587",
+          "char_start": 0,
+          "char_end": 20613,
+          "characters": 20613,
+          "line_start": 1,
+          "line_end": 326,
+          "original_text_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587",
+          "sent_text_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587",
+          "source_redacted": false
+        }
+      ],
+      "findings": [
+        {
+          "severity": "high",
+          "category": "bug",
+          "file": "mcp_server.py",
+          "location": "173-176",
+          "problem": "The method inspect_boundary compares the original input with itself (compare_messages(original, original)), which always yields a PASS status and discards the actual validation result, leading to incorrect verification of captured boundaries.",
+          "reason": "This logic error can cause the server to accept invalid outputs as valid, undermining the safety guarantee of boundary verification.",
+          "suggestion": "Replace the self‑comparison with a comparison against the baseline or expected input, e.g., compare_messages(original, baseline_original) where baseline is provided, or remove the unused variable and directly use the candidate comparison."
+        },
+        {
+          "severity": "high",
+          "category": "bug",
+          "file": "mcp_server.py",
+          "location": "210-215",
+          "problem": "In compare_recordings, the condition `if compare_messages(baseline[\"original_input\"], baseline[\"original_input\"])[\"status\"] != \"PASS\":` always evaluates to false because a message compared with itself always passes, making the block that handles an unhealthy baseline dead code.",
+          "reason": "The dead code masks potential errors in the baseline recording, preventing proper error reporting and leading to silent acceptance of an unhealthy baseline.",
+          "suggestion": "Replace the self‑comparison with a check against a known unhealthy state or remove the condition; alternatively, pass the baseline's validation result from elsewhere and act on it."
+        },
+        {
+          "severity": "medium",
+          "category": "security",
+          "file": "mcp_server.py",
+          "location": "25-38",
+          "problem": "The _public_payload function only checks a limited set of credential patterns via regular expressions and may miss newly introduced or obfuscated credential formats, potentially allowing sensitive data to be processed.",
+          "reason": "If a credential pattern bypasses detection, the WorkspaceError may not be raised, leading to accidental exposure of credentials in JSON payloads.",
+          "suggestion": "Broaden credential detection to include additional common patterns (e.g., AWS session tokens, GCP metadata tokens) and consider using a more comprehensive secret‑detection library; also make the regex configurable."
+        },
+        {
+          "severity": "low",
+          "category": "performance",
+          "file": "mcp_server.py",
+          "location": "95-105",
+          "problem": "Workspace.verdict performs a deepcopy of the entire JSON payload before mutating it, which can be expensive for large files and may cause high memory usage during processing.",
+          "reason": "Repeated deepcopy operations on large payloads can degrade performance and increase GC pressure, especially when processing many recordings.",
+          "suggestion": "Modify the function to work on a shallow copy or mutate a structured representation directly, only copying when necessary; or stream the JSON to avoid full in‑memory duplication."
+        },
+        {
+          "severity": "low",
+          "category": "error-handling",
+          "file": "mcp_server.py",
+          "location": "61-70",
+          "problem": "Workspace.read catches generic OSError, UnicodeError, ValueError and re‑raises a generic WorkspaceError, losing the original exception context and making debugging of file‑related failures harder.",
+          "reason": "Suppressing the original traceback can hinder root‑cause analysis in production environments.",
+          "suggestion": "Re‑raise the original exception or include the original error message and traceback in the WorkspaceError to preserve debugging information."
+        },
+        {
+          "severity": "low",
+          "category": "code-quality",
+          "file": "mcp_server.py",
+          "location": "260-265",
+          "problem": "The export_regression_gate method calls self.path(output_dir, new_directory=True) twice, overwriting the result and making the code harder to read; also the first call's return value is unused.",
+          "reason": "Redundant calls reduce readability and may indicate a copy‑paste error; they also add unnecessary computation.",
+          "suggestion": "Store the result of the first call in a variable and reuse it, or call the method once and assign the directory path directly."
+        }
+      ],
+      "response_file": "chunks/chunk-0001-response.json",
+      "response_sha256": "665da0a024e2bc2b7c6e020109563c2967b3e605c713473e162598c2fcb5c736",
+      "analysis_sha256": "0e8d3a900d6ec8be3226fbe0b8e5a323f9245652700707f40b54a6b463011cc6",
+      "output_truncated": false
+    }
+  ],
+  "provider_request_invocations": 1,
+  "total_reported_tokens": 13107,
+  "requests_missing_token_usage": 0,
+  "limitations": [
+    "COMPLETE means every scanned source fragment received a complete, valid model response; it does not certify full project understanding, bug freedom, or verified findings.",
+    "Only the explicitly listed source extensions are scanned. Ignored directories, links, binary files, unreadable and oversized files are excluded; scan warnings retain those limits.",
+    "UTF-8 bytes of the complete serialized request are used as a conservative planning token bound, with a protocol margin. This is not an actual model tokenizer or measured token usage, and model context support still requires provider validation.",
+    "Chunks are reviewed independently. Cross-file and cross-chunk reasoning is limited; no claim of a single model simultaneously seeing the entire project is made.",
+    "Compaction deduplicates structured suggestions and indexes existing evidence after review. It never summarizes away unread source and makes no measured token-saving claim.",
+    "Known credentials are located in each complete source before chunking, then masked with equal-length stars while retaining line separators. Original decoded-text hashes and ranges identify the scanned snapshot; a redacted snapshot is not byte-for-byte original source.",
+    "Model suggestions are not executed or independently proven. Hashes detect changes and do not authenticate a producer."
+  ],
+  "coverage": [
+    {
+      "file": "mcp_server.py",
+      "language": "Python",
+      "characters": 20613,
+      "decoded_utf8_bytes": 20627,
+      "original_file_bytes": 20627,
+      "decoded_text_sha256": "d18953de3e0e0daee345c159b2637573c4f0cf9cf0e44bac61f37828074de587",
+      "completed_characters": 20613,
+      "completed_ranges": [
+        {
+          "char_start": 0,
+          "char_end": 20613,
+          "line_start": 1,
+          "line_end": 326,
+          "chunk_id": "chunk-0001"
+        }
+      ],
+      "unfinished_ranges": [],
+      "source_redacted": false,
+      "all_fragments_completed": true,
+      "completed_percent": 100.0
+    }
+  ],
+  "completed_chunks": 1,
+  "completed_characters": 20613,
+  "all_scanned_fragments_completed": true,
+  "source_redacted": false
+}

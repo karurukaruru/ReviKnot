@@ -1,0 +1,99 @@
+1
+00:00:00,000 --> 00:00:05,000
+An SDK upgrade can break your agent
+while its tools still run.
+
+2
+00:00:05,000 --> 00:00:08,000
+ReviKnot checks the contract
+your agent depends on.
+
+3
+00:00:08,000 --> 00:00:13,000
+Here, the adapter drops tool-call IDs.
+Results lose their matching requests.
+
+4
+00:00:13,000 --> 00:00:17,000
+Start with a reproducible failure
+against the original input contract.
+
+5
+00:00:17,000 --> 00:00:22,000
+NVIDIA Nemotron proposes a bounded repair
+on Nebius Token Factory.
+
+6
+00:00:22,000 --> 00:00:26,000
+The proposal stays data.
+Model-written Python is never executed.
+
+7
+00:00:26,000 --> 00:00:29,000
+Independent checks decide
+whether the repair is accepted.
+
+8
+00:00:29,000 --> 00:00:33,000
+Keep the IDs, names and arguments
+that the agent needs to continue.
+
+9
+00:00:33,000 --> 00:00:37,000
+Eight checks cover multiple calls,
+nested data and legacy behavior.
+
+10
+00:00:37,000 --> 00:00:41,000
+Two broken outputs can agree.
+The original input contract still decides.
+
+11
+00:00:41,000 --> 00:00:46,000
+A deliberately corrupted repair must fail.
+The model cannot approve its own work.
+
+12
+00:00:46,000 --> 00:00:51,000
+Real model calls use two local fixture tools.
+This is a controlled message-contract test.
+
+13
+00:00:51,000 --> 00:00:56,000
+Three items at seven each should return 21.
+A lost call ID breaks the agent's handoff.
+
+14
+00:00:56,000 --> 00:01:00,000
+Preserve both calls and their IDs.
+Then check that the agent can finish.
+
+15
+00:01:00,000 --> 00:01:04,000
+The model returns 21.
+The result is independently checked.
+
+16
+00:01:04,000 --> 00:01:10,000
+Keep the model response, mapping,
+checks and tool results together.
+
+17
+00:01:10,000 --> 00:01:18,000
+Every request remains inspectable.
+This film replays evidence without new API calls.
+
+18
+00:01:18,000 --> 00:01:25,000
+Connect your coding agent through MCP.
+Check a capture. Keep the regression test.
+
+19
+00:01:25,000 --> 00:01:30,000
+Catch silent SDK regressions before merge.
+Keep the evidence with your code.
+
+20
+00:01:30,000 --> 00:01:36,000
+ReviKnot · Fix. Verify. Restore.
+karuru.top · GitHub · X @djkaruru

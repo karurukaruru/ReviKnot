@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "run_id": "13b5fa9f-a337-4407-a373-2ee0ba061fb0",
+  "created_at": "2026-10-26T09:05:03.185892+00:00",
+  "mode": "source-review",
+  "status": "COMPLETE",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "dry_run": false,
+  "source_characters": 63833,
+  "files": [
+    {
+      "file": "long_source_fixture.py",
+      "language": "Python",
+      "characters": 63833,
+      "decoded_utf8_bytes": 63833,
+      "original_file_bytes": 63833,
+      "decoded_text_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515"
+    }
+  ],
+  "supported_extensions": {
+    ".py": "Python",
+    ".js": "JavaScript",
+    ".ts": "TypeScript",
+    ".java": "Java",
+    ".c": "C",
+    ".cpp": "C++",
+    ".h": "C/C++ Header",
+    ".go": "Go",
+    ".html": "HTML",
+    ".css": "CSS",
+    ".jsx": "JavaScript JSX",
+    ".tsx": "TypeScript TSX",
+    ".rs": "Rust"
+  },
+  "scan_warnings": [],
+  "planning": {
+    "context_tokens": 100000,
+    "max_output_tokens": 8192,
+    "max_chunks": 20,
+    "max_file_bytes": 8000000,
+    "request_byte_limit": 128000,
+    "protocol_margin": 2048,
+    "count_method": "complete serialized request UTF-8 bytes as conservative token upper bound; not an actual model tokenizer",
+    "source_truncated": false
+  },
+  "chunks": [
+    {
+      "chunk_id": "chunk-0001",
+      "status": "COMPLETE",
+      "input_file": "chunks/chunk-0001-input.json",
+      "input_sha256": "2be0767fc7d1b7b81fa694c2bae89824feca4d6c0b7796115adbc45a2a178ef1",
+      "analysis_file": "chunks/chunk-0001-analysis.json",
+      "request_bytes_upper_bound": 89758,
+      "reserved_context_upper_bound": 99998,
+      "fragments": [
+        {
+          "file": "long_source_fixture.py",
+          "language": "Python",
+          "source_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+          "char_start": 0,
+          "char_end": 59077,
+          "characters": 59077,
+          "line_start": 1,
+          "line_end": 2695,
+          "original_text_sha256": "a7ca60873d68248295402dfdcb75ce4a63f6be38ae97adcd4cb711431ef225c2",
+          "sent_text_sha256": "a7ca60873d68248295402dfdcb75ce4a63f6be38ae97adcd4cb711431ef225c2",
+          "source_redacted": false
+        }
+      ],
+      "findings": [],
+      "response_file": "chunks/chunk-0001-response.json",
+      "response_sha256": "b31cf45bd1fd224e8c8ba1ac8167ed9f1d6e13ea5138bdb6ca0cf52685d8f122",
+      "analysis_sha256": "65c2a068485c9d8ba0d5de723704e0288b193ae54224fc376e09da7b4f8f9502",
+      "output_truncated": false
+    },
+    {
+      "chunk_id": "chunk-0002",
+      "status": "COMPLETE",
+      "input_file": "chunks/chunk-0002-input.json",
+      "input_sha256": "85b34a6f502b4f3b44df57a7998aa64fdf2e8236c65da276b9e41cf5f454f8e0",
+      "analysis_file": "chunks/chunk-0002-analysis.json",
+      "request_bytes_upper_bound": 10585,
+      "reserved_context_upper_bound": 20825,
+      "fragments": [
+        {
+          "file": "long_source_fixture.py",
+          "language": "Python",
+          "source_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+          "char_start": 59077,
+          "char_end": 63833,
+          "characters": 4756,
+          "line_start": 2696,
+          "line_end": 2909,
+          "original_text_sha256": "3d7480720020177b5d95dce1f751ab4839b12dd8614694f10ab04672c96266ef",
+          "sent_text_sha256": "3d7480720020177b5d95dce1f751ab4839b12dd8614694f10ab04672c96266ef",
+          "source_redacted": false
+        }
+      ],
+      "findings": [
+        {
+          "severity": "medium",
+          "category": "bug",
+          "file": "long_source_fixture.py",
+          "location": "2902-2904",
+          "problem": "mean_price divides by len(prices) without guarding against an empty list, causing ZeroDivisionError.",
+          "reason": "Calling mean_price([]) raises ZeroDivisionError at runtime; the inline comment explicitly acknowledges the unsafe empty-list case, so any caller passing an empty collection will crash.",
+          "suggestion": "Validate the input and raise a clear ValueError (or return None/0.0 per contract) when prices is empty, e.g. `if not prices: raise ValueError('prices must be non-empty')`."
+        },
+        {
+          "severity": "low",
+          "category": "maintainability",
+          "file": "long_source_fixture.py",
+          "location": "2696-2899",
+          "problem": "A large hardcoded literal dictionary of ~200+ sku_XXXXX entries with cycling values is embedded directly in the module.",
+          "reason": "This bulk data inflates the source file, is hard to review or diff, and mixes data with logic; any change requires editing code rather than a data file, and it obscures the actual functions in the module.",
+          "suggestion": "Move the SKU data to an external data file (JSON/CSV) or generate it programmatically, and load it at runtime; keep the module focused on logic."
+        },
+        {
+          "severity": "low",
+          "category": "code-quality",
+          "file": "long_source_fixture.py",
+          "location": "2902-2904",
+          "problem": "mean_price accepts any iterable but relies on sum() and len(), which fails for generators or one-shot iterators.",
+          "reason": "If a caller passes a generator, len() raises TypeError; the function's implicit contract (a sized sequence) is undocumented, leading to surprising failures.",
+          "suggestion": "Either document that a sized sequence is required, or materialize the input once (e.g. `prices = list(prices)`) before computing sum and length."
+        },
+        {
+          "severity": "info",
+          "category": "code-quality",
+          "file": "long_source_fixture.py",
+          "location": "2902-2904",
+          "problem": "mean_price lacks a docstring and type hints, and the inline comment describes test intent rather than behavior.",
+          "reason": "Without a documented contract (input type, empty-input behavior, return type), callers cannot know how to use it safely, and the comment referencing 'a review suggestion' is noise in production code.",
+          "suggestion": "Add a docstring and type hints (e.g. `def mean_price(prices: Sequence[float]) -> float:`), and remove or replace the meta-comment with a description of the actual behavior."
+        }
+      ],
+      "response_file": "chunks/chunk-0002-response.json",
+      "response_sha256": "57811d14a6b64db091df0242a6ca8981288c051f904637d8c54a6db240eadcce",
+      "analysis_sha256": "d1e27834d89290473b289d18b8ac1928ff51a401eef643222f187e15c8ae9e7b",
+      "output_truncated": false
+    }
+  ],
+  "provider_request_invocations": 2,
+  "total_reported_tokens": 37169,
+  "requests_missing_token_usage": 0,
+  "limitations": [
+    "COMPLETE means every scanned source fragment received a complete, valid model response; it does not certify full project understanding, bug freedom, or verified findings.",
+    "Only the explicitly listed source extensions are scanned. Ignored directories, links, binary files, unreadable and oversized files are excluded; scan warnings retain those limits.",
+    "UTF-8 bytes of the complete serialized request are used as a conservative planning token bound, with a protocol margin. This is not an actual model tokenizer or measured token usage, and model context support still requires provider validation.",
+    "Chunks are reviewed independently. Cross-file and cross-chunk reasoning is limited; no claim of a single model simultaneously seeing the entire project is made.",
+    "Compaction deduplicates structured suggestions and indexes existing evidence after review. It never summarizes away unread source and makes no measured token-saving claim.",
+    "Known credentials are redacted before transport. Original decoded-text hashes and ranges identify the scanned snapshot; a redacted snapshot is not byte-for-byte original source.",
+    "Model suggestions are not executed or independently proven. Hashes detect changes and do not authenticate a producer."
+  ],
+  "coverage": [
+    {
+      "file": "long_source_fixture.py",
+      "language": "Python",
+      "characters": 63833,
+      "decoded_utf8_bytes": 63833,
+      "original_file_bytes": 63833,
+      "decoded_text_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+      "completed_characters": 63833,
+      "completed_ranges": [
+        {
+          "char_start": 0,
+          "char_end": 59077,
+          "line_start": 1,
+          "line_end": 2695,
+          "chunk_id": "chunk-0001"
+        },
+        {
+          "char_start": 59077,
+          "char_end": 63833,
+          "line_start": 2696,
+          "line_end": 2909,
+          "chunk_id": "chunk-0002"
+        }
+      ],
+      "unfinished_ranges": [],
+      "source_redacted": false,
+      "all_fragments_completed": true,
+      "completed_percent": 100.0
+    }
+  ],
+  "completed_chunks": 2,
+  "completed_characters": 63833,
+  "all_scanned_fragments_completed": true,
+  "source_redacted": false
+}

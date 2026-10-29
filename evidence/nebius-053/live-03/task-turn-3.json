@@ -1,0 +1,118 @@
+{
+  "provider": "nebius",
+  "endpoint": "https://api.tokenfactory.nebius.com/v1/chat/completions",
+  "timestamp": "2026-10-28T02:37:30.164869+00:00",
+  "request_kind": "model",
+  "http_attempted": true,
+  "provenance": "live HTTP attempt",
+  "status": "PASS",
+  "http_status": 200,
+  "latency_ms": 2094.0,
+  "usage": {
+    "completion_tokens": 226,
+    "prompt_tokens": 172,
+    "total_tokens": 398,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "cost_usd": null,
+  "cost_note": "Unknown; no pricing assumption or zero-cost claim",
+  "parameters": {
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Use the provided tools to compute inventory value. Do not invent stock or price. Call both inventory and price for SKU A, in the same response if possible. After both tool results, return only JSON with sku and inventory_value."
+      },
+      {
+        "role": "user",
+        "content": "What is the inventory value of SKU A? Use inventory and price before calculating."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-baab573494f01195",
+            "type": "function",
+            "function": {
+              "name": "inventory",
+              "arguments": "{\"sku\": \"A\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "content": "{\"quantity\": 3}",
+        "tool_call_id": "chatcmpl-tool-baab573494f01195"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-8a4372f64dbeb83d",
+            "type": "function",
+            "function": {
+              "name": "price",
+              "arguments": "{\"sku\": \"A\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "content": "{\"price\": 7}",
+        "tool_call_id": "chatcmpl-tool-8a4372f64dbeb83d"
+      }
+    ],
+    "max_tokens": 2048,
+    "temperature": 0,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "request_id": "1ee1845f0ce31d9410d85c639edc7b97",
+  "raw_response": "{\"id\":\"chatcmpl-9553d5d4-22a9-4b1f-b934-77d2b49d40c8\",\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{\"content\":\"{\\n  \\\"sku\\\": \\\"A\\\",\\n  \\\"inventory_value\\\": 21\\n}\",\"refusal\":null,\"role\":\"assistant\",\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":\"Okay, let's see. The user is asking for the inventory value of SKU A. They mentioned using both inventory and price before calculating. \\n\\nFirst, I need to check the inventory for SKU A. The inventory tool was called and returned a quantity of 3. Then, the price tool was called and returned a price of 7. \\n\\nTo find the inventory value, I should multiply the quantity by the price. So 3 times 7 equals 21. \\n\\nThe user wants the result in JSON format with sku and inventory_value. So the final answer should be {\\\"sku\\\": \\\"A\\\", \\\"inventory_value\\\": 21}. \\n\\nI need to make sure there are no other steps or tools needed. Since both inventory and price have been retrieved, and the calculation is straightforward, there's no need for additional tool calls. \\n\\nJust confirm that the JSON structure is correct and that it includes the right keys. Yep, looks good. Time to output the JSON.\\n\"},\"stop_reason\":null,\"token_ids\":null,\"routed_experts\":null}],\"created\":1793155051,\"model\":\"nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B\",\"object\":\"chat.completion\",\"moderation\":null,\"service_tier\":null,\"system_fingerprint\":\"vllm-0.22.0-b08c96cd\",\"usage\":{\"completion_tokens\":226,\"prompt_tokens\":172,\"total_tokens\":398,\"completion_tokens_details\":null,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"prompt_text\":null,\"kv_transfer_params\":null}",
+  "response": {
+    "id": "chatcmpl-9553d5d4-22a9-4b1f-b934-77d2b49d40c8",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"sku\": \"A\",\n  \"inventory_value\": 21\n}",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning": "Okay, let's see. The user is asking for the inventory value of SKU A. They mentioned using both inventory and price before calculating. \n\nFirst, I need to check the inventory for SKU A. The inventory tool was called and returned a quantity of 3. Then, the price tool was called and returned a price of 7. \n\nTo find the inventory value, I should multiply the quantity by the price. So 3 times 7 equals 21. \n\nThe user wants the result in JSON format with sku and inventory_value. So the final answer should be {\"sku\": \"A\", \"inventory_value\": 21}. \n\nI need to make sure there are no other steps or tools needed. Since both inventory and price have been retrieved, and the calculation is straightforward, there's no need for additional tool calls. \n\nJust confirm that the JSON structure is correct and that it includes the right keys. Yep, looks good. Time to output the JSON.\n"
+        },
+        "stop_reason": null,
+        "token_ids": null,
+        "routed_experts": null
+      }
+    ],
+    "created": 1793155051,
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "vllm-0.22.0-b08c96cd",
+    "usage": {
+      "completion_tokens": 226,
+      "prompt_tokens": 172,
+      "total_tokens": 398,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "prompt_logprobs": null,
+    "prompt_token_ids": null,
+    "prompt_text": null,
+    "kv_transfer_params": null
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "scope": "Captured module bytes used by the frozen long-source development run before the subsequently identified cross-chunk credential-redaction fix. This test fixture contains no credential. Final safety fix is verified offline without rerunning paid inference.",
+  "source_review_sha256": "2856964bf1b816591a8923f8e8cc252f34f38589da33ae5e92df0d0476f02827",
+  "module_snapshot": "executed-source-review.py.txt",
+  "provider_sha256": "8f2b33f41961e15bf71ac17d54bfd446ad94f9ca8ea4dd5b5b2662d493f201bb",
+  "runtime_report": "deepseek-long-source-01/report.json"
+}

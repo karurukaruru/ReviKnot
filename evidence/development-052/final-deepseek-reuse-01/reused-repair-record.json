@@ -1,0 +1,60 @@
+{
+  "identity": {
+    "software": "langchain-nvidia-ai-endpoints",
+    "version": "upstream source blob (not a verified 1.4.3 wheel)",
+    "boundary": "convert_message_to_dict",
+    "source_sha256": "ea569d556ed537e15bf5eea3db555adc9b4fb003a92543c70f1c719a9c47c873",
+    "environment": {
+      "python": "3.12.13",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "patchcourt": "0.5.2"
+    },
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "source_provenance": {
+      "git_blob": "8c23b708e8511c70e771f48fe71b4309d201f61b",
+      "reference_url": "https://github.com/langchain-ai/langchain-nvidia/issues/387",
+      "execution_kind": "Audited historical source snapshot with inert SDK message types; not a full installed SDK"
+    },
+    "verification_sha256": "576c6199d4932f8d1648b37d9f8267f445296addcb5a561171c9cfdd7d8c332a",
+    "verification_files_sha256": {
+      "repair_plan.py": "6da33fb58053b8c4be0c686280de6d02de55b80853ce3ce38ee2ea67e89e8f13",
+      "semantic.py": "842acc4eb8d1a4dfb46ff7b70fc769618bdcaeb3cf11c0c3ec048c0ab6ab32c3",
+      "counterexamples.py": "7eb3d2ab3eeac25cff483b2debbff070749cf703f1f029aee48939b12285c991",
+      "reproductions.py": "31f31343593ac0b3cd6a996f715aeb0fbe4c77f5f106c4c0b193aa62356c5947",
+      "live_workflow.py": "4dfed438e865304640e90adc6fb1e2647f1063350784a51f5b5b11d72ee3f5a2",
+      "providers.py": "51c5c05cb341fe6d1efe3b777b9c2e6222f6c2b6483a00c8e7f9f5b08502fa29",
+      "evidence.py": "7239158a584ae97328f9dd51f2d97b99e09ccfaf508e5e0e724a89c0637db802",
+      "knowledge.py": "5eb9d84a255ab4b5d27ac2d37f5298b6fafd7438ad416a436cadd0f40e9a2ddd"
+    },
+    "fingerprint_format": "SHA256 of UTF-8 source with LF newlines; bundle uses canonical JSON of named source texts"
+  },
+  "evidence_level": "verified",
+  "scope": "this exact execution environment only",
+  "verified_at": "2026-10-26T09:00:58.183995+00:00",
+  "evidence": {
+    "status": "PASS",
+    "execution": true,
+    "plan": {
+      "source": "tool_calls",
+      "id_field": "id",
+      "name_field": "name",
+      "arguments_field": "args",
+      "arguments_encoding": "json",
+      "preserve_legacy": true,
+      "empty_content": "null"
+    },
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "source_run_created_at": "2026-10-26T09:00:52.454105+00:00",
+    "scope": "Mapping passed independent checks, corrupted-ID rejection and fixture-task execution; integrity is not authenticated provenance"
+  },
+  "revalidation_triggers": [
+    "source hash",
+    "dependency version",
+    "environment",
+    "contract change"
+  ],
+  "integrity": "971a024b115592da027848091599a89ac296ba3360fa044be02e0145ae9aad6a",
+  "reuse_policy": "Prior observation only; execute contract again before current PASS"
+}

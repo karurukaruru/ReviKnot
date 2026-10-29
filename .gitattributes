@@ -1,0 +1,14 @@
+* text=auto
+# Preserve byte-exact source snapshots, raw logs, checksums and release assets.
+patchcourt/fixtures/* -text -whitespace
+examples/reproductions/*.txt -text -whitespace
+examples/reproductions/*LICENSE -text -whitespace
+evidence/** -text -whitespace
+release/** -text -whitespace
+# MCP receipts bind these exact source/runtime bytes across OS checkouts.
+patchcourt/mcp_server.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+scripts/verify_mcp_workflow.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+examples/refund-agent/capture.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+patchcourt/evidence.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+patchcourt/semantic.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+patchcourt/recording.py -text whitespace=trailing-space,space-before-tab,cr-at-eol

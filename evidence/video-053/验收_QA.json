@@ -1,0 +1,44 @@
+{
+  "product": "ReviKnot",
+  "status": "PASS",
+  "duration_seconds": 96,
+  "subtitles": 18,
+  "new_inference_calls": 0,
+  "files": {
+    "ReviKnot-96s-Preview.mp4": {
+      "sha256": "859ffdd18a542b36f0c26aa9ade2e66b9941a9f46c6586c88e9fe63d68a941b3",
+      "bytes": 14096990,
+      "width": 1920,
+      "height": 1080,
+      "frames": 2880,
+      "fps": "30/1",
+      "decode": "PASS",
+      "audio_lufs": -16.42,
+      "audio_true_peak_dbtp": -2.11,
+      "video_stream_sha256": "SHA256=b604f2c3d1c729ee5fd49c7429d5c49dc036bb15db30a723c80784ec2b6c4ba9",
+      "pixel_format": "yuvj420p",
+      "color_range": "pc",
+      "color_space": "bt470bg"
+    },
+    "ReviKnot-96s-Music-SFX.mp4": {
+      "sha256": "7700c7a48b86df37d5ab3958234ada17f6e374c68386ee5980d4600bcceb8a40",
+      "bytes": 12665039,
+      "width": 1920,
+      "height": 1080,
+      "frames": 2880,
+      "fps": "30/1",
+      "decode": "PASS",
+      "audio_lufs": -19.06,
+      "audio_true_peak_dbtp": -4.34,
+      "video_stream_sha256": "SHA256=b604f2c3d1c729ee5fd49c7429d5c49dc036bb15db30a723c80784ec2b6c4ba9",
+      "pixel_format": "yuvj420p",
+      "color_range": "pc",
+      "color_space": "bt470bg"
+    }
+  },
+  "source_report_sha256": "370b136a85badad53124474e5f02f6318922831d7b4d5fd07f97a5ec9ec31634",
+  "visual_review": "PASS",
+  "picture_streams_identical": true,
+  "visual_sample_count": 131,
+  "viewer_review": "PASS"
+}

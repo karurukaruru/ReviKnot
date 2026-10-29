@@ -1,0 +1,6 @@
+{
+  "sha256": "859ffdd18a542b36f0c26aa9ade2e66b9941a9f46c6586c88e9fe63d68a941b3",
+  "duration_seconds": 96,
+  "visual_review": "PASS",
+  "scope": "Local master decoded and inspected; native NVIDIA report and local spoken platform attribution reviewed. Not a public upload."
+}

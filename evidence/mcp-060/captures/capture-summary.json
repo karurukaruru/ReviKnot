@@ -1,0 +1,73 @@
+{
+  "kind": "controlled refund-agent application boundary",
+  "scope": "Local synthetic data; no SDK installation, model request, customer data or payment execution.",
+  "provider_requests": 0,
+  "verdicts": {
+    "broken": {
+      "status": "FAIL",
+      "findings": [
+        {
+          "code": "ORPHAN_RESULT",
+          "path": "/3/tool_call_id",
+          "message": "Tool result lacks an earlier unmatched call"
+        },
+        {
+          "code": "ORPHAN_RESULT",
+          "path": "/4/tool_call_id",
+          "message": "Tool result lacks an earlier unmatched call"
+        },
+        {
+          "code": "SEMANTIC_CHANGE",
+          "path": "/2/tool_calls/0",
+          "expected": {
+            "id": "order-R104",
+            "name": "lookup_order",
+            "args": {
+              "order_id": "R104",
+              "include": {
+                "line_items": true,
+                "payment_credentials": false
+              }
+            }
+          },
+          "actual": null,
+          "message": "Observable message semantics changed"
+        },
+        {
+          "code": "SEMANTIC_CHANGE",
+          "path": "/2/tool_calls/1",
+          "expected": {
+            "id": "policy-R104",
+            "name": "check_return_policy",
+            "args": {
+              "order_id": "R104",
+              "item": "headset",
+              "condition": {
+                "opened": false
+              },
+              "reason": "商品未拆封"
+            }
+          },
+          "actual": null,
+          "message": "Observable message semantics changed"
+        }
+      ]
+    },
+    "fixed": {
+      "status": "PASS",
+      "findings": []
+    },
+    "corrupt": {
+      "status": "FAIL",
+      "findings": [
+        {
+          "code": "SEMANTIC_CHANGE",
+          "path": "/2/tool_calls/1/args/condition/opened",
+          "expected": false,
+          "actual": 0,
+          "message": "Observable message semantics changed"
+        }
+      ]
+    }
+  }
+}

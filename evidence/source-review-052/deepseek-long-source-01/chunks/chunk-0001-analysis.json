@@ -1,0 +1,13 @@
+{
+  "chunk_id": "chunk-0001",
+  "status": "COMPLETE",
+  "findings": [],
+  "response_file": "chunks/chunk-0001-response.json",
+  "response_sha256": "b31cf45bd1fd224e8c8ba1ac8167ed9f1d6e13ea5138bdb6ca0cf52685d8f122",
+  "scope": "Unverified read-only model suggestions; no source or repair executed",
+  "model_identity": {
+    "requested_model": "deepseek-flash",
+    "returned_model": "deepseek-flash",
+    "policy": "exact requested model or explicitly verified official DeepSeek version alias"
+  }
+}

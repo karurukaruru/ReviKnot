@@ -1,0 +1,71 @@
+1
+00:00:13,256 --> 00:00:16,705
+The model reads the original adapter and proposes a restricted field mapping.
+
+2
+00:00:17,469 --> 00:00:19,223
+Independent checks accept or reject it.
+
+3
+00:00:20,023 --> 00:00:23,430
+Failed candidates are retained, and revision attempts have a fixed limit.
+
+4
+00:00:24,210 --> 00:00:26,366
+No model generated Python is executed.
+
+5
+00:00:32,200 --> 00:00:36,766
+Here is the mapping returned by the model, beside eight independent checks.
+
+6
+00:00:36,766 --> 00:00:41,200
+They cover multiple calls, nested arguments, normal messages, and legacy behavior.
+
+7
+00:00:41,200 --> 00:00:43,616
+A deliberately corrupted repair must also fail.
+
+8
+00:00:43,616 --> 00:00:46,280
+The model cannot approve its own work.
+
+9
+00:00:47,190 --> 00:00:49,375
+Now look at the task outcome.
+
+10
+00:00:49,375 --> 00:00:53,016
+In the real model conversation, local tools return three items
+
+11
+00:00:53,016 --> 00:00:54,473
+at seven per item.
+
+12
+00:00:54,473 --> 00:00:56,520
+The original adapter loses the calls.
+
+13
+00:00:56,520 --> 00:00:58,700
+The verified mapping preserves them,
+
+14
+00:00:58,700 --> 00:01:02,120
+and the model returns the independently checked value: twenty-one.
+
+15
+00:01:05,202 --> 00:01:09,677
+The evidence records the exact model, request count, token usage, and tool results.
+
+16
+00:01:10,452 --> 00:01:13,375
+These are real API calls with controlled local fixture data.
+
+17
+00:01:14,146 --> 00:01:17,599
+This is a bounded adapter repair, not a general code sandbox.
+
+18
+00:01:18,350 --> 00:01:22,984
+Powered by NVIDIA Nemotron, on Nebius Token Factory.

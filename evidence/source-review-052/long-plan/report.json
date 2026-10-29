@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "run_id": "44e70ce4-68e9-4d55-89c2-79d529909b81",
+  "created_at": "2026-10-26T09:02:23.543851+00:00",
+  "mode": "source-review",
+  "status": "PLANNED",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "dry_run": true,
+  "source_characters": 63833,
+  "files": [
+    {
+      "file": "long_source_fixture.py",
+      "language": "Python",
+      "characters": 63833,
+      "decoded_utf8_bytes": 63833,
+      "original_file_bytes": 63833,
+      "decoded_text_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515"
+    }
+  ],
+  "supported_extensions": {
+    ".py": "Python",
+    ".js": "JavaScript",
+    ".ts": "TypeScript",
+    ".java": "Java",
+    ".c": "C",
+    ".cpp": "C++",
+    ".h": "C/C++ Header",
+    ".go": "Go",
+    ".html": "HTML",
+    ".css": "CSS",
+    ".jsx": "JavaScript JSX",
+    ".tsx": "TypeScript TSX",
+    ".rs": "Rust"
+  },
+  "scan_warnings": [],
+  "planning": {
+    "context_tokens": 100000,
+    "max_output_tokens": 8192,
+    "max_chunks": 20,
+    "max_file_bytes": 8000000,
+    "request_byte_limit": 128000,
+    "protocol_margin": 2048,
+    "count_method": "complete serialized request UTF-8 bytes as conservative token upper bound; not an actual model tokenizer",
+    "source_truncated": false
+  },
+  "chunks": [
+    {
+      "chunk_id": "chunk-0001",
+      "status": "NOT_ATTEMPTED",
+      "input_file": "chunks/chunk-0001-input.json",
+      "input_sha256": "1486b56298c9b06e1286eac951032043a490f0e9a3e995a3fc0c2b58c8b4c420",
+      "analysis_file": "chunks/chunk-0001-analysis.json",
+      "request_bytes_upper_bound": 89758,
+      "reserved_context_upper_bound": 99998,
+      "fragments": [
+        {
+          "file": "long_source_fixture.py",
+          "language": "Python",
+          "source_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+          "char_start": 0,
+          "char_end": 59077,
+          "characters": 59077,
+          "line_start": 1,
+          "line_end": 2695,
+          "original_text_sha256": "a7ca60873d68248295402dfdcb75ce4a63f6be38ae97adcd4cb711431ef225c2",
+          "sent_text_sha256": "a7ca60873d68248295402dfdcb75ce4a63f6be38ae97adcd4cb711431ef225c2",
+          "source_redacted": false
+        }
+      ],
+      "findings": []
+    },
+    {
+      "chunk_id": "chunk-0002",
+      "status": "NOT_ATTEMPTED",
+      "input_file": "chunks/chunk-0002-input.json",
+      "input_sha256": "c101ba84350045cad8042f9553514c6b11f4ef5c3c11832e0c9eaa19398b2699",
+      "analysis_file": "chunks/chunk-0002-analysis.json",
+      "request_bytes_upper_bound": 10585,
+      "reserved_context_upper_bound": 20825,
+      "fragments": [
+        {
+          "file": "long_source_fixture.py",
+          "language": "Python",
+          "source_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+          "char_start": 59077,
+          "char_end": 63833,
+          "characters": 4756,
+          "line_start": 2696,
+          "line_end": 2909,
+          "original_text_sha256": "3d7480720020177b5d95dce1f751ab4839b12dd8614694f10ab04672c96266ef",
+          "sent_text_sha256": "3d7480720020177b5d95dce1f751ab4839b12dd8614694f10ab04672c96266ef",
+          "source_redacted": false
+        }
+      ],
+      "findings": []
+    }
+  ],
+  "provider_request_invocations": 0,
+  "total_reported_tokens": null,
+  "requests_missing_token_usage": 0,
+  "limitations": [
+    "COMPLETE means every scanned source fragment received a complete, valid model response; it does not certify full project understanding, bug freedom, or verified findings.",
+    "Only the explicitly listed source extensions are scanned. Ignored directories, links, binary files, unreadable and oversized files are excluded; scan warnings retain those limits.",
+    "UTF-8 bytes of the complete serialized request are used as a conservative planning token bound, with a protocol margin. This is not an actual model tokenizer or measured token usage, and model context support still requires provider validation.",
+    "Chunks are reviewed independently. Cross-file and cross-chunk reasoning is limited; no claim of a single model simultaneously seeing the entire project is made.",
+    "Compaction deduplicates structured suggestions and indexes existing evidence after review. It never summarizes away unread source and makes no measured token-saving claim.",
+    "Known credentials are redacted before transport. Original decoded-text hashes and ranges identify the scanned snapshot; a redacted snapshot is not byte-for-byte original source.",
+    "Model suggestions are not executed or independently proven. Hashes detect changes and do not authenticate a producer."
+  ],
+  "coverage": [
+    {
+      "file": "long_source_fixture.py",
+      "language": "Python",
+      "characters": 63833,
+      "decoded_utf8_bytes": 63833,
+      "original_file_bytes": 63833,
+      "decoded_text_sha256": "9e59a86d35b643a3e38590dae550f2529d7f282a5659c3337ec6fcbfa2395515",
+      "completed_characters": 0,
+      "completed_ranges": [],
+      "unfinished_ranges": [
+        {
+          "char_start": 0,
+          "char_end": 59077,
+          "line_start": 1,
+          "line_end": 2695,
+          "chunk_id": "chunk-0001"
+        },
+        {
+          "char_start": 59077,
+          "char_end": 63833,
+          "line_start": 2696,
+          "line_end": 2909,
+          "chunk_id": "chunk-0002"
+        }
+      ],
+      "source_redacted": false,
+      "all_fragments_completed": false,
+      "completed_percent": 0.0
+    }
+  ],
+  "completed_chunks": 0,
+  "completed_characters": 0,
+  "all_scanned_fragments_completed": false,
+  "source_redacted": false
+}

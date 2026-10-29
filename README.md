@@ -90,3 +90,12 @@ are retained for compatibility; the product name is ReviKnot.
 
 Repository: https://github.com/karurukaruru/ReviKnot
 Blog: https://karuru.top · X: https://x.com/djkaruru
+
+
+## Published release and latest demonstration
+
+- [Free judge test build](https://github.com/karurukaruru/ReviKnot/releases/tag/v0.6.0): no model key required for saved playback or exported gates.
+- [Reviewed 4K60 demonstration MP4](https://github.com/karurukaruru/ReviKnot/releases/download/v0.6.0/ReviKnot-96s-Demo.mp4): 3840×2160, 60fps, 96seconds, original music/effects without voiceover. Animation was rendered from the original reviewed source with a retimed design clock; the repository URL is checked against this repository.
+- [Editable 4K60 film source](https://github.com/karurukaruru/ReviKnot/releases/download/v0.6.0/ReviKnot-4K60-Film-Source-20261029.zip), including production assets, licenses and review records. No installed dependencies or API credentials are included.
+
+The exact verified program source ZIP is the release snapshot at commit`8e87ecd92ec52517e01a1b32d2af130c69b623ed`. This README additionally records publication and the upgraded film. The original 1080p30 movie in historical evidence remains as a labelled source snapshot. The new video does not represent additional model inference.

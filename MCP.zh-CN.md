@@ -1,5 +1,8 @@
 # 给编码Agent接入ReviKnot
 
+> **0.6.1：**默认安装已包含 MCP 和全部四个工具。运行 `python setup_reviknot.py --client codex`（或 `cursor` / `claude-code`）可一次安装、检查并配置。[快速开始](QUICKSTART.md)。
+
+
 适用时机：改了工具消息转换、升级SDK后，准备合并代码前检查一次。由宿主Agent按需调用，不需要定时轮询。
 
 ## 安装
@@ -7,7 +10,7 @@
 解压源码，在项目目录用Python3.11或更新版本运行：
 
 ```powershell
-python -m pip install -e ".[mcp]"
+python -m pip install -e .
 ```
 
 基础程序支持Python3.10；MCP额外依赖官方SDK，需要3.11+。安装不需要模型API密钥。

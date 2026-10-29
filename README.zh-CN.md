@@ -1,59 +1,76 @@
 # ReviKnot
 
-**给编码Agent使用的兼容性检查：在SDK改动合并前，发现消息字段被静默改坏。**
+**JSON 合法，Agent 也可能坏掉。先检查消息语义有没有丢，再发布 SDK 或适配器变更。**
 
-当前本地版本0.6.0。MCP接口已实现并实测；本轮没有推送、发布或提交。
-[MCP接入](MCP.md) · [开发复查](RELEASE_REVIEW_060_ZH.md) · [最后本人操作](FINAL_REMAINING_ZH.md)
+[English](README.md) · [快速开始](QUICKSTART.md) · [MCP 接入](MCP.zh-CN.md) · [96秒演示](https://github.com/karurukaruru/ReviKnot/releases/download/v0.6.0/ReviKnot-96s-Demo.mp4)
 
-## 什么情况下用
+ReviKnot 检查工具调用 ID、嵌套参数等内容是否被完整保留，返回具体出错位置，并导出能运行的回归测试。两个输出一样，也可能是两个都错了；检查依据是原始输入契约。
 
-修改工具消息序列化、升级SDK后，捕获这段适配器的真实输入和输出。让编码Agent调用ReviKnot，
-检查调用ID、名称、参数与结果关系是否保留，查看具体失败路径，修改后重新捕获复验，最后导出门禁放进CI。
-两个版本都产生相同坏输出，仍不能判兼容。
+这里公开的是 **MIT 许可的完整程序**，包含 MCP、命令行、网页、源码审查、模型工作流和回归导出。无需解锁功能。评委小包是方便试看的保存记录；[最新 Release](https://github.com/karurukaruru/ReviKnot/releases/latest)同时提供完整源码和安装包。
 
-## 先接到Agent
+## 第一次用：一个命令跑起来
 
-解压源码后，在项目目录使用Python3.11+：
+准备 **Python 3.11 或更新版本**。下载并解压完整源码，在项目目录打开终端：
 
 ```sh
-python -m pip install -e ".[mcp]"
-python -m reviknot mcp --workspace .
+python setup_reviknot.py --open
 ```
 
-第二条启动stdio服务，等待宿主连接，不会打开网页。Codex注册命令和四个工具参数见[MCP.md](MCP.md)。
-不会偷偷修改全局编辑器配置；由宿主Agent在相关修改后或合并前触发，不需要每隔几秒轮询。
-MCP不调用模型、不加载.env、不执行任意项目代码，检查和导出门禁不产生模型费用。
+它会自动创建环境、一次安装全部运行依赖（含 MCP）、用真实连接发现四个工具、生成接入配置，并打开 **http://127.0.0.1:8765/**。不用 API。首次安装需要联网下载依赖；按 Ctrl+C 停止网页。macOS/Linux 可以用 `python3`。
 
-## 无需API先体验
+预期结果：错误适配器 FAIL，正确保留输入的版本 PASS，故意损坏的修复 FAIL。负控显示 FAIL 是正常结果。
+
+## 接到 Agent：选客户端，一次配好
+
+| 客户端 | 命令 | 自动处理 |
+|---|---|---|
+| 已安装 CLI 的 Codex | `python setup_reviknot.py --client codex` | 用检查过的 Python 路径注册 MCP。 |
+| Cursor | `python setup_reviknot.py --client cursor` | 合并当前项目的 `.cursor/mcp.json`。 |
+| Claude Code | `python setup_reviknot.py --client claude-code` | 合并当前项目的 `.mcp.json`。 |
+| 其他 MCP 客户端 | `python setup_reviknot.py` | 生成 `.reviknot/mcp.json` 和 `codex.toml`。 |
+
+后面可以加 `--workspace 你的项目绝对路径` 接到另一个项目。原来其他 MCP 服务的配置会保留，发生修改的配置会备份。完成后重启或重新加载客户端，按提示允许项目 MCP，即可发现全部四个工具，不用逐个安装。
+
+可以对 Agent 说：
+
+> 改完适配器后捕获输入输出，用 ReviKnot 检查原始输入有没有被完整保留，解释出错字段，修复后再检查，最后导出回归测试。
+
+工具负责直接检查消息、检查录制事务、比较两份录制、导出回归门禁。[接入文档](MCP.zh-CN.md)提供参数和捕获方法，由客户端按任务调用即可，不需要每隔几秒轮询。
+
+## 之后怎么运行
+
+不用手动激活环境，统一用这个入口：
 
 ```sh
-python -m reviknot demo --output outputs/my-demo
-python -m reviknot serve outputs/my-demo
-python examples/refund-agent/capture.py --output outputs/my-refund-case
+python run_reviknot.py doctor
+python run_reviknot.py --help
+python run_reviknot.py review-source . --dry-run --output outputs/source-plan
 ```
 
-基础CLI支持Python3.10+。演示保留故意失败的对照，并非每格都应该绿。
-退款例子包含两个工具、嵌套布尔、中文、币种与审批要求：丢ID失败，保持原语义通过，false改成0失败。
-这是本地受控示例，不连接客户或支付；检查的是消息是否保真，不是替你审核退款业务规则。
+`doctor` 实际连接 MCP 并检查全部依赖。最后一条只规划完整源码审查，不调用模型。每次报告使用新的输出目录。
 
-## NVIDIA模型负责什么
+已有 Python 环境，也可以运行 `python -m pip install -e .`，默认包含全部运行工具，再运行 `python -m reviknot setup --client codex`。不再需要单装 MCP；旧的 `[mcp]` 写法仍兼容。Python 3.10 保留基础命令兼容；完整功能使用 3.11+。
 
-通过Nebius Token Factory提出受限字段映射，由独立脚本检查，再运行真实模型/工具对话。
-不执行模型任意Python。0.6.0真实运行：4次请求、5992报告token、8项检查通过、故意破坏修复被拒、健康检查结果21。
-3×7只是确认工具链能完成的诊断值，不是产品主功能。
+## 接自己的模型
 
-新推理才需要ignored `.env.local`中的合法NEBIUS_API_KEY与准确模型ID；
-见[NEBIUS_RUNBOOK_ZH.md](NEBIUS_RUNBOOK_ZH.md)。输出、调用数、上下文、MCP诊断长度均可配置；
-见[OUTPUT_SETTINGS_ZH.md](OUTPUT_SETTINGS_ZH.md)。长源码全文读取/分块压缩是单独的[review-source](SOURCE_REVIEW.md)。
+把 `.env.example` 复制为 `.env.local`，去掉 Nebius 两行前面的 `#`，填自己的 `NEBIUS_API_KEY` 和明确的 `NEBIUS_MODEL`（未使用的服务保持注释）：
 
-## 验收与范围
+```sh
+python run_reviknot.py --env-file .env.local live --provider nebius --output outputs/my-live-run
+```
 
-官方MCP SDK2.3.0客户端真实启动stdio子进程，发现4工具、调用6次；导出门禁在隔离Python中得到1/0/1。
-真实已安装NVIDIA SDK1.4.3/1.5.0的历史执行证据另列，不冒充新缺陷。
-测试日志与最终校验见[0.6.0复查](RELEASE_REVIEW_060_ZH.md)。
-目前支持已审查的文本/工具消息，不是万能代码审查或沙箱；不支持、已脱敏或不完整记录不能判PASS。
-哈希用于发现改动，不认证提交者。旧失败与PARTIAL评测保留，不编造通用准确率或获奖保证。
+这一项会实际调用 API。本地检查、MCP、保存记录播放和导出门禁不需要模型账号。Nebius、DeepSeek、GLM 工作流均包含；配置 Tavily 密钥后可以加 `--tavily`。
 
-MIT许可证与历史源码署名保留；旧patchcourt/acv入口兼容。
-博客https://karuru.top；Xhttps://x.com/djkaruru；仓库https://github.com/karurukaruru/ReviKnot。
-当前免费评委测试包与96秒无旁白视频使用见[JUDGE_TESTING.md](JUDGE_TESTING.md)。
+网页默认允许不限次数的手动运行，需要时设 `--max-runs N`。每次运行的请求数、轮数、输出长度和可选账本都能配置。源码审查默认按 10万 token 规划，并按需拆分、压缩。模型实际容量由服务商决定。[设置说明](OUTPUT_SETTINGS_ZH.md)。
+
+## 验证与边界
+
+- Nebius 上 NVIDIA Nemotron 的真实记录：4次调用、5,992个报告 token、8项检查和损坏修复负控。
+- 官方 MCP 客户端调用全部四个工具，错误／修复／损坏门禁退出码分别为1／0／1。
+- 保留真实安装 SDK 的比较记录、源码归属与历史失败。视频展示0.6.0验收，0.6.1改善安装接入，没有冒充新一轮模型实测。
+
+MCP 检查录制的消息契约；完整源码审查是单独的模型工作流。项目不会因两个错误输出一样就判通过，也不会自动执行模型返回的 Python。
+
+[MIT许可](LICENSE) · [架构](ARCHITECTURE.md) · [评委说明](JUDGE_TESTING.md)
+
+GitHub：https://github.com/karurukaruru/ReviKnot · 博客：https://karuru.top · X：https://x.com/djkaruru

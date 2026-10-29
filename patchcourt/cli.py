@@ -42,6 +42,12 @@ def main(argv=None):
     parser.add_argument("--version", action="version", version="ReviKnot " + __version__)
     parser.add_argument("--env-file", help="Explicit local credential file; only supported API variables are loaded")
     commands = parser.add_subparsers(dest="command", required=True)
+    setup = commands.add_parser("setup", help="Check all tools, generate MCP configuration and run the quickstart")
+    setup.add_argument("--workspace", default=".")
+    setup.add_argument("--client", choices=("none", "codex", "cursor", "claude-code"), default="none")
+    setup.add_argument("--open", action="store_true", help="Open the local demo after setup")
+    doctor = commands.add_parser("doctor", help="Check installation and discover all four tools through real MCP stdio")
+    doctor.add_argument("--workspace", default=".")
     demo = commands.add_parser("demo", help="Execute pinned source cases, repairs, controls and export the dashboard")
     demo.add_argument("--output", default="outputs/reviknot")
     demo.add_argument("--knowledge-dir")
@@ -53,7 +59,7 @@ def main(argv=None):
     captured.add_argument("recording", help="BoundaryRecorder schema 1.0 JSON")
     captured.add_argument("--request-id", help="Required when more than one adapter transaction was captured")
     captured.add_argument("--output", required=True, help="New evidence directory; prior output is never overwritten")
-    mcp = commands.add_parser("mcp", help="Expose local boundary verification and regression-gate tools over MCP stdio; requires the optional mcp extra")
+    mcp = commands.add_parser("mcp", help="Expose local boundary verification and regression-gate tools over MCP stdio; all four tools included in the default installation")
     mcp.add_argument("--workspace", required=True, help="Existing root directory; tool file paths must be relative to this workspace")
     mcp.add_argument("--max-file-bytes", type=int, default=8_000_000, help="Maximum JSON file size per tool input (1..64000000 bytes)")
     mcp.add_argument("--max-findings", type=int, default=100, help="Maximum returned findings per comparison (1..10000); total and truncation remain explicit")
@@ -124,7 +130,7 @@ def main(argv=None):
     live_demo.add_argument("--tavily", action="store_true")
     live_demo.add_argument("--knowledge-dir", help="Save verified mappings and reuse them only after fresh independent checks")
     live_demo.add_argument('--budget',help='Optional persistent ledger shared by this server; saved limits remain authoritative')
-    live_demo.add_argument('--max-runs',type=int,default=3,help='Server run ceiling, including failed attempts; restarting never resets a supplied persistent ledger')
+    live_demo.add_argument('--max-runs',type=int,default=0,help='Optional server run ceiling; 0 (default) allows unlimited user-started runs; a supplied persistent ledger is still respected')
     _live_options(live_demo)
     budget_command=commands.add_parser('budget',help='Inspect a saved request ledger, or explicitly adjust its limits with an audit reason; no requests are made')
     budget_command.add_argument('ledger')
@@ -134,6 +140,13 @@ def main(argv=None):
     budget_command.add_argument('--reason',help='Required for an explicit limit adjustment; prior reservations are never reset')
     args = parser.parse_args(argv)
     try:
+        if args.command in {"setup", "doctor"}:
+            from reviknot.setup import setup_workspace, doctor
+            if args.command == "setup":
+                setup_workspace(args.workspace, client=args.client, open_demo=args.open)
+            else:
+                print(json.dumps(doctor(args.workspace), ensure_ascii=False, indent=2))
+            return 0
         if args.command == "mcp":
             if args.env_file:
                 raise ValueError("MCP does not load credential files; omit --env-file")

@@ -55,7 +55,7 @@ const context=vm.createContext({
   assert.equal(requests.filter(request=>request.method==='POST').length,1,'An explicit click sends exactly one fixed run request');
   assert.equal(element('state').textContent,'INCONCLUSIVE');
   assert.equal(element('run').disabled,false);
-  state={...state,runs:3,report:null,error:'Synthetic worker failure'};
+  state={...state,runs:3,limits:{max_runs:3},report:null,error:'Synthetic worker failure'};
   await vm.runInContext('poll()',context);
   assert.equal(element('after-detail').textContent,'Synthetic worker failure');
   assert.equal(element('elapsed').textContent,'Run ended · inspect details');
@@ -69,5 +69,8 @@ const context=vm.createContext({
   await vm.runInContext('poll()',context);
   assert.equal(element('run').disabled,true,'The configured server limit remains enforced');
   assert.equal(requests.filter(request=>request.method==='POST').length,1);
+  state={...state,runs:500,limits:{max_runs:0}};
+  await vm.runInContext('poll()',context);
+  assert.equal(element('run').disabled,false,'Zero means unlimited user-started sessions');
   console.log('Actual live viewer state transitions PASS; no network or provider calls.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

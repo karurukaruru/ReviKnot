@@ -1,5 +1,8 @@
 # ReviKnot in a coding agent
 
+> **0.6.1:** MCP and all four tools are included in the default installation. Use `python setup_reviknot.py --client codex` (or `cursor` / `claude-code`) for unified setup. [Quick start](QUICKSTART.md).
+
+
 [简体中文接入步骤](MCP.zh-CN.md)
 
 ReviKnot exposes four local MCP tools. A coding agent can check captured
@@ -13,7 +16,7 @@ monitoring, general source-code review, or automatic approval of a repair.
 Use Python3.11+ for the optional MCP SDK; the base CLI remains Python3.10+.
 
 ```sh
-python -m pip install -e ".[mcp]"
+python -m pip install -e .
 python -m reviknot mcp --workspace /absolute/path/to/your/project
 ```
 
@@ -97,3 +100,5 @@ Python. Broken/corrupt test exits1 and fixed exits0 are expected controls.
 简体中文：在编辑器Agent完成相关修改或SDK升级后按需检查，不需要每隔几秒轮询。
 它检查捕获消息的语义是否被保留，返回具体字段位置，并导出回归门禁。MCP检查不产生模型费用；
 NVIDIA生成修复仍是单独的显式live流程。完整源码审查是另一个review-source命令，不能混称。
+
+Client configuration references: [Codex](https://learn.chatgpt.com/docs/extend/mcp), [Cursor](https://cursor.com/docs/mcp), [Claude Code](https://code.claude.com/docs/en/mcp). Unified setup uses these local stdio formats; client trust prompts are handled by the client.

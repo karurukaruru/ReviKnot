@@ -1,101 +1,82 @@
 # ReviKnot
 
-**Compatibility checks your coding agent can call before an SDK change reaches production.**
+**Valid JSON can still break an AI agent. Check the message contract before shipping an SDK change.**
 
-Local version 0.6.0. [简体中文](README.zh-CN.md) · [MCP setup](MCP.md) · [Executed evidence](RELEASE_REVIEW_060_ZH.md) · [Submission actions](FINAL_REMAINING_ZH.md)
+[简体中文](README.zh-CN.md) · [Quick start](QUICKSTART.md) · [MCP integration](MCP.md) · [4K60 video](https://github.com/karurukaruru/ReviKnot/releases/download/v0.6.0/ReviKnot-96s-Demo.mp4)
 
-An adapter can silently lose tool-call IDs or change nested arguments while its
-output is still valid JSON. ReviKnot checks the captured output against the
-original input contract. Even identical outputs do not establish compatibility
-when both were already broken.
+ReviKnot checks whether an adapter preserves tool-call IDs, nested arguments and other message semantics. Your coding agent gets exact failure paths and can export a runnable regression test. Two equally broken outputs do not count as compatible.
 
-## Use it in your coding workflow
+This is the **complete MIT-licensed application**: MCP, CLI, local web interface, source review, provider workflows and regression exports are included. No separate restricted edition or unlock step. The small judge download is a convenient recorded example; [Releases](https://github.com/karurukaruru/ReviKnot/releases/latest) also provides the full source and installable application.
 
-Capture the affected message boundary after changing an adapter or upgrading
-an SDK. Your coding agent can call four local MCP tools to inspect it, compare
-recordings and export a standalone regression gate. Failures identify field
-paths. Check the repaired capture again and keep the gate in CI.
+## Quick start: one command
 
-From an extracted source checkout, Python 3.11+:
+Install Python **3.11+** for the complete application. Download and extract the latest source ZIP, or clone this repository. Open a terminal in the project folder:
 
 ```sh
-python -m pip install -e ".[mcp]"
-python -m reviknot mcp --workspace .
+python setup_reviknot.py --open
 ```
 
-The server waits on stdio for its host. [MCP.md](MCP.md) provides the actual
-Codex registration command and tool arguments. No global editor configuration
-is changed silently. The host chooses when to invoke checks; this release does
-not claim continuous background monitoring or a recorded editor session.
+This creates a local environment, installs **all runtime dependencies including MCP**, discovers all four tools over a real MCP connection, generates client configuration and opens **http://127.0.0.1:8765/**. No API key is needed. First installation needs internet access for packages. Stop the server with Ctrl+C. On macOS/Linux use `python3` if needed.
 
-## Try it without any model key
+The example deliberately shows a broken adapter FAIL, preserved input PASS and a corrupted repair FAIL. Negative-control failures are expected.
+
+## Connect your coding agent in one command
+
+Select your client; all four tools are configured together:
+
+| Client | Command | Result |
+|---|---|---|
+| Codex with its CLI installed | `python setup_reviknot.py --client codex` | Registers the verified interpreter using the official CLI. |
+| Cursor | `python setup_reviknot.py --client cursor` | Merges this workspace's `.cursor/mcp.json`. |
+| Claude Code | `python setup_reviknot.py --client claude-code` | Merges this workspace's `.mcp.json`. |
+| Other MCP clients | `python setup_reviknot.py` | Generates `.reviknot/mcp.json` and `.reviknot/codex.toml`. |
+
+Add `--workspace /absolute/path/to/your/project` for a different project. Unrelated server entries are preserved; changed configurations are backed up. Restart/reload your client and allow the project MCP server when prompted. Example request:
+
+> After changing this adapter, capture its message boundary. Use ReviKnot to check it against the original input, explain failed paths, recheck the repaired capture and export a regression gate.
+
+The tools are `inspect_boundary`, `check_recording`, `compare_recordings` and `export_regression_gate`. They check explicit JSON captures in the chosen workspace; your host decides when to call them. [MCP.md](MCP.md) includes inputs and capture examples.
+
+## Run without activating an environment
 
 ```sh
-python -m reviknot demo --output outputs/my-demo
-python -m reviknot serve outputs/my-demo
-python examples/refund-agent/capture.py --output outputs/my-refund-case
+python run_reviknot.py doctor
+python run_reviknot.py --help
+python run_reviknot.py review-source . --dry-run --output outputs/source-plan
 ```
 
-The demo records controlled cases and intentionally retains failures. The
-refund example has two tool calls, nested booleans, Unicode, currency and an
-approval requirement. Lost IDs FAIL, preserved input PASS, false-to-zero
-mutation FAIL. It is synthetic local data; no customer or payment system runs.
-The base CLI supports Python 3.10+; optional MCP uses Python 3.11+.
+`doctor` checks installed dependencies and discovers all four tools through real stdio. Source-review dry runs plan complete coverage without inference. Use a new output directory for each report.
 
-## NVIDIA repair workflow
+Already managing an environment? **`python -m pip install -e .` installs the complete runtime**, then `python -m reviknot setup --client codex` connects it. The old `[mcp]` spelling is still compatible but no longer required. Python 3.10 retains legacy CLI compatibility; complete installation requires 3.11+.
 
-An explicitly selected NVIDIA model proposes a bounded declarative mapping.
-Independent checks and a deliberately damaged mapping challenge it before the
-actual tool conversation is allowed to succeed. Arbitrary model Python is not
-executed. Keep credentials in an ignored local `.env.local`:
+## Your own model account
+
+Copy `.env.example` to ignored `.env.local`, uncomment only the fields you use and set `NEBIUS_API_KEY` and an exact available `NEBIUS_MODEL`, then:
 
 ```sh
-python -m reviknot --env-file .env.local live --provider nebius --model nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B --budget outputs/my-budget.json --output outputs/my-new-live-run
+python run_reviknot.py --env-file .env.local live --provider nebius --output outputs/my-live-run
 ```
 
-This command makes paid provider requests. MCP checks, saved replay and
-exported gates do not. Request/output/context limits are configurable;
-[OUTPUT_SETTINGS_ZH.md](OUTPUT_SETTINGS_ZH.md) explains their scope and audit
-trail. [Full source review](SOURCE_REVIEW.md) is a separate chunked workflow.
+This makes real provider requests. Playback, local checks, MCP and exported gates do not. Nebius Token Factory, DeepSeek and GLM workflows are included; Tavily search uses `--tavily` and your own `TAVILY_API_KEY`.
 
-## What was actually executed
+The web workbench permits unlimited **user-started sessions by default**; set `--max-runs N` if you want a session cap. Per-run requests, turns, output length and optional persistent budgets remain configurable. Full-source review defaults to a 100,000-token planning window and splits/compresses context as needed. Providers determine actual model context/output capacity. [Settings](OUTPUT_SETTINGS_ZH.md).
 
-- 0.6.0 NVIDIA Nemotron on Nebius Token Factory: 4 model calls, 5992
-reported tokens, 8 checks, corrupted repair rejected, controlled health check 21.
-- Official MCP SDK 2.3.0 client → stdio: 4 tools, 6 calls; independent exported gate
-exits 1/0/1 for broken/fixed/corrupt captures. [Original MCP evidence](evidence/mcp-060/mcp-workflow.json).
-- Real installed NVIDIA SDK 1.4.3/1.5.0 workers are a separate credited historical
-case. Equal broken outputs remain NEEDS_REVIEW. [SDK execution](UPGRADE_RUN.md).
-- Current tests and release checks are recorded in [RELEASE_REVIEW_060_ZH.md](RELEASE_REVIEW_060_ZH.md).
+## Executed evidence and scope
 
-The checker covers reviewed text/tool-message schemas, not every SDK or
-arbitrary project code. Redacted/unsupported captures do not earn PASS. Hashes
-detect changes but do not authenticate a producer. Historical failures and the
-small developer-authored PARTIAL benchmark remain available; no universal
-accuracy or comparative performance claim is made.
+- Recorded NVIDIA Nemotron 3 Nano on Nebius Token Factory: four model calls, 5,992 reported tokens, eight independent checks and a corrupted-repair negative control.
+- Official MCP SDK: all four tools and broken/fixed/corrupt exported gates with exit codes 1/0/1.
+- Real installed NVIDIA SDK comparisons, credited sources and historical failures are retained. [SDK case](UPGRADE_RUN.md) · [Original acceptance](RELEASE_REVIEW_060_ZH.md).
+- The 96-second film shows the 0.6.0 evidence run. Version 0.6.1 improves installation and onboarding; it does not claim a new model run.
 
-## Development and judging
+The checker covers reviewed text/tool-message schemas. Unsupported or redacted captures do not earn PASS. Source review is a separate model workflow. MCP does not silently monitor an editor or execute model-provided Python.
+
+## Development
 
 ```sh
-python -m pip install pytest pytest-subtests
+python -m pip install -e ".[dev]"
 python -m pytest
 ```
 
-The free judge portal and standard-library gates require no model account.
-Fresh MCP use needs its optional SDK; fresh NVIDIA generation needs lawful API
-access. See [JUDGE_TESTING.md](JUDGE_TESTING.md). This iteration is local, not yet
-published or submitted. [MIT license](LICENSE); credited source and third-party
-notices remain with their evidence. Legacy `patchcourt` and `acv` entry points
-are retained for compatibility; the product name is ReviKnot.
+[MIT license](LICENSE) · [Architecture](ARCHITECTURE.md) · [Judge instructions](JUDGE_TESTING.md)
 
-Repository: https://github.com/karurukaruru/ReviKnot
-Blog: https://karuru.top · X: https://x.com/djkaruru
-
-
-## Published release and latest demonstration
-
-- [Free judge test build](https://github.com/karurukaruru/ReviKnot/releases/tag/v0.6.0): no model key required for saved playback or exported gates.
-- [Reviewed 4K60 demonstration MP4](https://github.com/karurukaruru/ReviKnot/releases/download/v0.6.0/ReviKnot-96s-Demo.mp4): 3840×2160, 60fps, 96seconds, original music/effects without voiceover. Animation was rendered from the original reviewed source with a retimed design clock; the repository URL is checked against this repository.
-- [Editable 4K60 film source](https://github.com/karurukaruru/ReviKnot/releases/download/v0.6.0/ReviKnot-4K60-Film-Source-20261029.zip), including production assets, licenses and review records. No installed dependencies or API credentials are included.
-
-The exact verified program source ZIP is the release snapshot at commit`8e87ecd92ec52517e01a1b32d2af130c69b623ed`. This README additionally records publication and the upgraded film. The original 1080p30 movie in historical evidence remains as a labelled source snapshot. The new video does not represent additional model inference.
+GitHub: https://github.com/karurukaruru/ReviKnot · Blog: https://karuru.top · X: https://x.com/djkaruru

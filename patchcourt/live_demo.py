@@ -12,10 +12,10 @@ from .evidence import sanitize
 from . import providers
 
 def serve_live_demo(output='outputs/live-demo',port=8780,provider='glm',model=None,use_tavily=False,knowledge_dir=None,
-                    budget_path=None,max_runs=3,**options):
+                    budget_path=None,max_runs=0,**options):
     configuration=validate_workflow_limits(**options)
-    if type(max_runs) is not int or not 1<=max_runs<=MAX_WORKFLOW_STEPS:
-        raise ValueError(f'max_runs must be an integer from 1 to {MAX_WORKFLOW_STEPS}')
+    if type(max_runs) is not int or max_runs < 0:
+        raise ValueError('max_runs must be a nonnegative integer; 0 means unlimited user-started runs')
     configuration['max_output_tokens']=providers.validate_output_tokens(provider,configuration['max_output_tokens']
         if configuration['max_output_tokens'] is not None else (2048 if provider=='nebius' else 4096))
     selected=providers.select_model(provider,model,require_nemotron=provider=='nebius')
@@ -71,7 +71,7 @@ def serve_live_demo(output='outputs/live-demo',port=8780,provider='glm',model=No
                 return self.send(400,{'error':'Only the fixed empty workflow request is allowed'})
             with lock:
                 if state['status']=='RUNNING': return self.send(409,{'error':'Run already active'})
-                if state['runs']>=max_runs: return self.send(429,{'error':f'{max_runs}-run server budget exhausted; a supplied persistent ledger is never reset by restarting'})
+                if max_runs and state['runs']>=max_runs: return self.send(429,{'error':f'{max_runs}-run server budget exhausted; a supplied persistent ledger is never reset by restarting'})
                 state.update(status='RUNNING',events=[],report=None,runs=state['runs']+1)
                 state.pop('error',None)
             try:

@@ -101,7 +101,7 @@ class LiveDemoKnowledgeTests(unittest.TestCase):
             self.assertEqual(main(["live-demo", "--provider", "deepseek", "--knowledge-dir", "outputs/verified-plans",
                                    "--output", "outputs/test-workbench", "--tavily"]), 0)
         serve.assert_called_once_with("outputs/test-workbench", 8780, provider="deepseek", model=None,
-                                      use_tavily=True, knowledge_dir="outputs/verified-plans",budget_path=None,max_runs=3,
+                                      use_tavily=True, knowledge_dir="outputs/verified-plans",budget_path=None,max_runs=0,
                                       max_model_requests=16,max_tool_turns=8,max_repair_attempts=3,
                                       token_reservation_limit=400000,max_output_tokens=None)
 

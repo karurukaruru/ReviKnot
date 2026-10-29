@@ -6,7 +6,10 @@ from pathlib import Path
 from acv import cli
 
 
-def test_openai_compatible_http_request_runs_end_to_end(tmp_path: Path) -> None:
+def test_openai_compatible_http_request_runs_end_to_end(tmp_path: Path, monkeypatch) -> None:
+    # A machine's proxy must not route this local fake API to an external service.
+    monkeypatch.setenv('NO_PROXY', '127.0.0.1,localhost,::1')
+    monkeypatch.setenv('no_proxy', '127.0.0.1,localhost,::1')
     received: dict[str, object] = {}
 
     class Handler(BaseHTTPRequestHandler):

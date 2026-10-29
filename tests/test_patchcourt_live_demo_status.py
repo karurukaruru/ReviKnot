@@ -37,7 +37,7 @@ def exercise_demo(tmp_path, outcomes, thread=ImmediateThread,**configuration):
                 snapshots.append(deepcopy(self.call('GET','/state')[1]))
                 # A poll must read the terminal state without initiating work.
                 assert self.call('GET','/state')[1]==snapshots[-1]
-            if len(outcomes)==configuration.get('max_runs',3):
+            if configuration.get('max_runs', 0) and len(outcomes)==configuration['max_runs']:
                 assert self.call('POST','/run',session)[0]==429
         def server_close(self): pass
     with patch('patchcourt.live_demo.ThreadingHTTPServer',FakeServer),patch(
@@ -96,3 +96,11 @@ def test_actual_viewer_script_handles_inconclusive_without_reposting():
     script=Path(__file__).with_name('live_status_script_check.cjs')
     result=subprocess.run([executable,str(script)],capture_output=True,text=True,timeout=15)
     assert result.returncode==0,result.stdout+result.stderr
+
+
+def test_workbench_default_allows_more_than_three_user_started_runs(tmp_path):
+    states, posts, calls = exercise_demo(tmp_path, [{'status': 'PASS'}] * 5)
+    assert calls == 5
+    assert all(post[0] == 202 for post in posts)
+    assert states[-1]['runs'] == 5
+    assert states[-1]['limits']['max_runs'] == 0

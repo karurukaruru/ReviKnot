@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        python: ['3.10', '3.13']
+        python: ['3.10', '3.11', '3.13']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -16,7 +16,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -e . pytest==8.4.2 pytest-subtests
       - if: matrix.python != '3.10'
-        run: python -m pip install -e ".[mcp]"
+        run: python -m reviknot doctor --workspace .
       - run: python -m pytest
       - run: python -m patchcourt demo --output evidence/ci
       - run: python -m unittest discover -s evidence/ci -p test_regression.py

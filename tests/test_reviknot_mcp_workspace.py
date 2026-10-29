@@ -4,6 +4,7 @@ import builtins
 import hashlib
 import json
 import os
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -86,8 +87,12 @@ def test_source_checkout_install_guidance_works_without_published_project(tmp_pa
     monkeypatch.setattr(builtins, "__import__", missing)
     with pytest.raises(WorkspaceError) as caught:
         create_server(tmp_path)
-    assert 'pip install -e ".[mcp]"' in str(caught.value)
-    assert 'pip install "mcp>=2,<3"' in str(caught.value)
+    if sys.version_info < (3, 11):
+        assert "MCP requires Python 3.11+" in str(caught.value)
+        assert "base ReviKnot CLI still supports Python 3.10" in str(caught.value)
+    else:
+        assert 'pip install -e ".[mcp]"' in str(caught.value)
+        assert 'pip install "mcp>=2,<3"' in str(caught.value)
 
 
 def test_mcp_cli_bounds_tool_failure_diagnostics_and_keeps_stdout_clean(tmp_path, monkeypatch, capsys):

@@ -18,8 +18,8 @@
       "bytes": 889
     },
     ".github/workflows/patchcourt.yml": {
-      "sha256": "fb6e7320a7417005c4c5ae0f63f5710c136d81c175633c4996b27539a926f6e7",
-      "bytes": 1799
+      "sha256": "2da7f634d5e935a710e77ddffb384383ef6d71c1754ba74701a98e04c3b4b98b",
+      "bytes": 1847
     },
     ".gitignore": {
       "sha256": "e4848b8b7bd3887dbc6d16bc001b7eb122f0fa0842c2fddf90de54ca02ab585b",
@@ -138,8 +138,8 @@
       "bytes": 1909
     },
     "README.md": {
-      "sha256": "949aacd3e1f266a548b1dd2c5dbc1fa0928e760a5f8d2916e380f7e643ea8219",
-      "bytes": 4466
+      "sha256": "32e1e1f9a99703899bb9603026b4f881703693ed8d3aae5b2906703b82af7d7d",
+      "bytes": 5591
     },
     "README.zh-CN.md": {
       "sha256": "2bb58e3e8477ab47e7535fca79d581154724454a2e0dd75e29374a6256d8820b",
@@ -3942,8 +3942,8 @@
       "bytes": 5924
     },
     "tests/test_reviknot_mcp_workspace.py": {
-      "sha256": "8a84cbb3194da7c965efc98ba5111eccee7703ad8e39eb95e82be8b980203f3a",
-      "bytes": 11621
+      "sha256": "0a47e603c347a35f80effea52f1e9f2b8d53d69a4fead3b37bef1fec0940fb9d",
+      "bytes": 11832
     },
     "tests/test_scanner.py": {
       "sha256": "171a9f42a3c5946643f9cec1f91a71ac029a794a2506add30acf082d266f4162",
@@ -3975,5 +3975,6 @@
     }
   },
   "final_review": "Docs, intended repository links, metadata and reviewed movie synchronized; runtime source unchanged.",
-  "published": false
+  "published": false,
+  "final_public_ci_fix": "Python3.10test now asserts unsupportedMCPversionguidance;Python3.13CI installsoptionalMCP SDK. Runtimecode unchanged."
 }

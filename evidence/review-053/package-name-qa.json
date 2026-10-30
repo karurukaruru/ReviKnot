@@ -1,9 +1,0 @@
-{
-  "status": "PASS",
-  "tests": 22,
-  "scope": "Versioned judge archive names preserve .0.5.3 and existing archives are not overwritten; full judge package suite",
-  "command": ".venv-dev/Scripts/python.exe -m pytest -q -o addopts= tests/test_judge_package.py",
-  "new_provider_requests": 0,
-  "expected_warning": "Synthetic adversarial duplicate-archive-member fixture",
-  "regression_test": "test_versioned_export_directory_keeps_the_complete_zip_name"
-}

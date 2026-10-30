@@ -1,6 +1,0 @@
-{
-  "report_sha256": "f143bf2db887e7365464a6b9f6bc6f7f732b7a6f85005fbf1e704f564d8d3e5c",
-  "plan_sha256": "eb490d9619c054ebfe91bd6a81a28394b08c3796cb875c6b6fc1efcb171b6ed2",
-  "corpus_sha256": "e12456f4cc67b4ac55b208237ce178cdcd920a0451fbe3477f256635d9c29dbf",
-  "note": "Local preregistration; integrity does not independently authenticate provenance"
-}

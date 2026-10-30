@@ -34,9 +34,9 @@ EXCLUDED_PARTS = {".git", ".venv", ".venv-dev", "venv", "node_modules", "__pycac
                   ".video-deps", ".test-deps", ".wheelhouse", ".local-tmp", "build", "dist",
                   "outputs", "release", "private"}
 MATERIALS = ("DEVPOST_SUBMISSION.md", "MOST_VALUABLE_FEEDBACK.md", "DEMO_SCRIPT.md",
-             "JUDGE_TESTING.md", "SUBMISSION_CHECKLIST.md", "FINAL_REMAINING_ZH.md",
-             "USER_ACTIONS_ZH.md", "NEBIUS_RUNBOOK_ZH.md", "OUTPUT_SETTINGS_ZH.md",
-             RELEASE_REVIEW, "COMPETITION_CHANGELOG.md", "MCP.md", "MCP.zh-CN.md")
+             "JUDGE_TESTING.md", "SUBMISSION_CHECKLIST.md", "OUTPUT_SETTINGS_ZH.md",
+             RELEASE_REVIEW, "MCP.md", "MCP.zh-CN.md", "QUICKSTART.md",
+             "SOURCE_REVIEW.md", "TESTING.md")
 SENSITIVE_NAMES = {"config.json", "credentials.json", "cookies.json", "token.json",
                    "新建 文本文档.txt"}
 
@@ -232,7 +232,7 @@ def main():
         f"01 源码：解压 Source.zip 后先读 README.zh-CN.md 和 {RELEASE_REVIEW}。\n"
         f"02 Python 运行包：pip install reviknot-{__version__}-py3-none-any.whl；python -m reviknot demo。\n"
         "03 评委演示：解压 Judge-Demo.zip，Windows 双击 Start-Judge-Demo.cmd。历史实测回放不调用 API。\n"
-        "04 提交文案：先看 FINAL_REMAINING_ZH.md 和 USER_ACTIONS_ZH.md，再复制英文表单文案。\n"
+        "04 提交文案：先看 00_START_HERE_先看这里.md 和 SUBMISSION_CHECKLIST.md，再复制英文表单文案。\n"
         "05 验收：包校验结果和每个源码文件的 SHA-256 位于相应 manifest。\n"
         "MCP：Python3.11+可选接入，详见MCP.zh-CN.md（English:MCP.md）；评委页的MCP卡片是已录制的真实stdio客户端验证。\n\n"
         "视频另行交付。本目录未上传 GitHub、YouTube 或比赛网站，也不包含密钥。\n"

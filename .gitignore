@@ -27,6 +27,9 @@ evidence/private/
 .sdk-environments/
 .video-deps/
 *.crdownload
+*.log
+*.tmp
+*.bak
 
 # Generated local installation and MCP configuration
 .reviknot/

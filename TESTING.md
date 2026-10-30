@@ -1,180 +1,32 @@
-# Testing and verification — ReviKnot 0.6.0
+# Testing and verification
 
-Final source-only review on 2026-10-29 (Windows, Python 3.12): **700 passed,
-5 skipped, 201 subtests passed**, with zero real provider requests.
-Raw result: [pytest-full.txt](evidence/review-final-20261029/pytest-full.txt).
-Four skips require Windows link privileges. The fifth explicitly skips a
-private, deliberately rejected historical Nebius proposal omitted from the
-public source-only checkout. The full development checkout previously passed
-701 tests with four skips; the different count is explained by that missing
-private fixture, not a failing test.
+## Current release: 0.6.1
 
-The warning for a duplicate ZIP member is an intentional adversarial fixture.
-Current actual NVIDIA runtime, official-client MCP proof, wheel isolation,
-SDK gates and film evidence are described in
-[the 0.6.0 review](RELEASE_REVIEW_060_ZH.md). Public source/test-build/YouTube
-publication and entrant form review remain separate outstanding gates; passing
-local tests is not a submission receipt or a guarantee of bug freedom.
+The 0.6.1 release review records the following local verification:
 
-For a full suite, use Python 3.11+ and install the optional MCP SDK, pytest and
-pytest-subtests. Run `python -m pytest -ra` from this project directory.
-Local loopback and child processes must be available.
+- Full regression suite: **707 passed, 6 skipped, 201 subtests passed**, with no failures.
+- Fresh-environment install and configuration checks: **34 passed, 1 skipped**.
+- Real stdio MCP discovery found all four tools after default installation.
+- The setup flow, configuration merge/backup behavior, repeatability and user-started web sessions were checked.
+- No provider inference was required for these local checks.
 
-## Historical 0.5.2 and earlier records
+See [RELEASE_REVIEW_061_ZH.md](RELEASE_REVIEW_061_ZH.md) for the exact environment and scope. The 0.6.1 review summary is the current test record; the raw text file below belongs to the preceding 0.6.0 source-only run, not the 0.6.1 count.
 
-The records below describe their labelled versions, not the current test count.
+## Previous release: 0.6.0
 
-# Testing and verification — 0.5.2 local delivery
+The archived raw result is [pytest-full.txt](evidence/review-final-20261029/pytest-full.txt): **700 passed, 5 skipped, 201 subtests passed** on Windows with Python 3.12. It is retained as historical evidence and must not be presented as the 0.6.1 run.
 
-Final Windows suite: **419 passed, 4 skipped**, CPython 3.12.13 / pytest 8.4.2.
-Raw output: `evidence/tests/pytest-052-release.txt`. Four existing skips require
-Windows link privileges; the duplicate-ZIP warning is an intentional negative
-fixture. No current Linux/remote CI result is claimed because this iteration
-has not been published.
+## Run locally
 
-New tests cover full scanned-source coverage, 1.1 MB input, long Unicode lines,
-source redaction before chunking, cross-boundary credentials, interrupted runs,
-whole-plan budget checks, output truncation, configurable 65536 output ceilings,
-v2 protocol preregistration and desktop/judge launcher boundaries. All source
-fragments and failures remain inspectable; complete receipt is not bug freedom.
+Use Python 3.11+ for the complete application and install development dependencies:
 
-Final wheel isolation, including full-source dry planning without site-packages,
-passed in `evidence/tests/wheel-verification-052-release.json`. Current installed
-SDK and portable-gate matrices passed 4/4 and 3/3 expected scenarios. The new
-judge package passed 24 actual Chrome checks at desktop/mobile widths.
+    python -m pip install -e ".[dev]"
+    python -m pytest -ra
 
-Actual DeepSeek repair and exact reuse passed on the final verifier source;
-`evidence/tests/current-live-source-052.json` matches all eight identity files.
-The credential-free long-source test completed two responses for 63833 decoded
-characters; its original pre-final-redaction-fix module snapshot is retained.
-That safety fix was verified offline without repeating paid inference. Frozen
-v1 evaluation remains PARTIAL, and v2 has no real model score. Details:
-[0.5.2 review](RELEASE_REVIEW_052_ZH.md), [source review](SOURCE_REVIEW.md).
+Local loopback and child processes must be available. Some platform-specific tests may skip when the operating system does not permit symbolic links.
 
-## Historical verification below
+## Scope
 
-# Testing and verification — 0.5.1
+Tests cover semantic message contracts, unsupported schemas and abstention, streaming reconstruction, redaction, evidence integrity, repair validation, CLI behavior, MCP stdio integration, setup/configuration, packaging and exported regression gates. Mock-provider tests are not real provider inference. A passing suite is evidence for tested behavior, not proof of bug freedom or universal framework compatibility.
 
-New checks exercise real captured input/output, standalone gate generation and
-future candidate verification, late credential redaction, adapter identity,
-mutating adapters, bounded inputs and checker-source isolation. The full loop
-runs with `python -I -S` using only the exported files and standard library.
-
-`evidence/recording-gate-051` preserves installed SDK execution and red/green/
-corruption outcomes. `evidence/experience-051-final-v2` contains 24 real Chrome
-transport/accessibility checks over synthetic localhost states; no real model
-request occurs. `evidence/gate-viewer-051-final-v2` contains the 16-check gate
-viewer/download review. Each browser record includes source hashes and scope.
-The frozen local suite passed **373 tests**, with four Windows symlink-permission
-skips; see `evidence/tests/pytest-051.txt`. The duplicate ZIP-member warning is
-an intentional adversarial archive fixture. Final wheel extraction/CLI and
-standalone-gate checks passed in `evidence/tests/wheel-verification-051-final.json`.
-All 35 current packaged resource/source files match the wheel byte-for-byte.
-The release installed-SDK gate matrix is
-`evidence/recording-gate-051/release-installed-sdk/matrix.json`: all three cases
-reached their expected contract assertion under `-I -S`, with no provider call.
-Remote 0.5.1 [run 40270078401](https://github.com/karurukaruru/agent-code-validator/actions/runs/40270078401)
-passed **377 tests each** on Python 3.10 and 3.13, and the four SDK-upgrade plus
-three captured-gate scenarios on Ubuntu and Windows. All four jobs checked out
-`925541ea57bea210efca964ba35c84d862aeb6e9`; result excerpts are in
-`evidence/tests/github-actions-051.json`. The initial Linux license-newline
-assertion failure is retained separately; no runtime byte changed in that fix.
-Historical 0.5.0 CI stays separate.
-
-## Historical 0.5.0 verification
-
-# Testing and verification — 0.5.0
-
-Local full suite: **333 passed, 4 skipped** on CPython 3.12.13 / pytest 8.4.2,
-recorded in `evidence/tests/pytest-050.txt`. The four skips require Windows
-symlink privileges. The initial run had two legacy local HTTP integration tests
-fail with proxy HTTP 502; bypassing the system proxy for localhost with
-`NO_PROXY=127.0.0.1,localhost,::1` made both pass, and the full recorded run uses
-that environment setting. This does not bypass or mock a real model service.
-
-The current installed SDK matrix is **4/4 expected outcomes** at
-`evidence/upgrade-run-050/real-sdk/matrix.json`, with zero provider requests.
-Wheel isolation passed in `evidence/tests/wheel-verification-050.json`.
-The judge export passed **22 Chrome checks** at desktop and mobile widths in
-`evidence/judge-browser-050`; replay performs no inference requests. English
-137-second development-video decode/visual evidence is in
-`evidence/video-development-050`.
-
-New synthetic tests cover exact model identity, assistant/finish/refusal checks,
-reasoning metadata isolation, persisted failures, shared cross-process budgets,
-scoped plan reuse, fixed evaluation arms, and false-positive submission gates.
-Real DeepSeek HTTP records are separately frozen under `evidence/development-050`.
-NVIDIA/Nebius model inference remains pending access.
-
-The exact 0.5.0 code commit `e3aa4bd47edd8b4f20d100b66e2d27833c90bac2`
-passed [GitHub Actions run 40260807511](https://github.com/karurukaruru/agent-code-validator/actions/runs/40260807511):
-Python 3.10 and 3.13 each passed **337 tests** on Ubuntu; Ubuntu and Windows
-installed-SDK jobs each passed the four expected scenario outcomes. These are
-the same test suite on two interpreters, not 674 independent tests. Exact
-checkout SHAs, steps and result excerpts are recorded in
-`evidence/tests/github-actions-050.json`.
-
-## Historical verification
-
-# Testing and verification — 0.4.0
-
-Current local suite: **222 passed, 4 skipped**, CPython 3.12.13 / pytest 8.4.2.
-Raw output: `evidence/tests/pytest-040.txt`. Added protocol and upgrade tests cover
-malformed streams, ambiguous identities, unchanged broken outputs, environment
-tampering, stale pins/runtime, dependency drift, credential isolation, sensitive
-argument omission, worker failures and preserved evidence.
-
-The actual installed SDK matrix has **4/4 expected outcomes** in
-`evidence/upgrade-run/real-sdk/matrix.json`. Installed CrewAI formatting and its
-reviewed repair pass eight controls in `evidence/crewai-sdk`. Chrome checks pass
-**41/41** with desktop/mobile screenshots in `evidence/upgrade-run/browser`.
-Wheel isolation, packaged constraints and CLI verification are recorded in
-`evidence/tests/wheel-verification-040.json`. No new model/provider call occurred.
-The new Windows/Ubuntu installed-SDK CI job is configured, not remotely verified.
-
-```bash
-python -m pytest -ra
-python scripts/verify_sdk_upgrade.py --environment-dir outputs/sdk-envs --prepare --output outputs/sdk-matrix
-node tests/browser_upgrade_check.cjs
-python -m build --wheel --no-isolation
-python scripts/verify_wheel.py
-```
-
-Browser QA uses saved evidence by default and an installed Chrome/Edge with
-Node 22+. Full limitations and current gates: [development review](DEVELOPMENT_REVIEW_ZH.md).
-
-## Historical 0.3.2 and 0.3.1 verification
-
-**Latest local build (0.3.2): 186 passed, 4 skipped**, recorded in `evidence/tests/pytest-final-032.txt`. Thirteen new boundary tests cover real child processes, unhealthy baselines, custom input, missing/changed SDKs, credential isolation, deadlines, output limits and preserved evidence. Eight actual source/installed-SDK matrix cases and ten Chrome viewer checks are in `evidence/boundary-run`. The rebuilt wheel executes its packaged boundary workers (`evidence/tests/wheel-verification-final-032.json`). Separate real GLM reuse evidence remains in `evidence/glm-reuse`. There is no 0.3.2 remote CI claim; the records below concern 0.3.1.
-
-Current local release suite: **161 passed, 4 skipped** on Python 3.13.14 / pytest 8.4.2, recorded in evidence/tests/pytest-glm-release.txt. Skips are existing Windows symlink/directory-link permission checks. The two original ACV loopback integration tests pass when loopback access is permitted. Synthetic tests are not provider evidence.
-
-New coverage checks exact GLM routing/no FlashX fallback, credential redaction, mapping mutations, malformed plans, preserved failed proposals, live task identity/answer validation, unexpected provider metadata, duplicate calls, report integrity, evaluation label withholding, pre-request protocol freezing, failed-arm preservation, citation validation and mandatory knowledge revalidation.
-
-Actual HTTP experiments are separately in evidence/glm-live and evidence/glm-evaluation. Browser checks: 13 live workbench checks in evidence/live-browser plus 14 earlier offline viewer checks in evidence/browser. Video: complete decode and six-frame visual inspection in evidence/live-video. Package: scripts/verify_wheel.py and evidence/tests/wheel-verification-glm.json. Configured-value and token-marker scan: scripts/release_check.py and evidence/tests/secret-scan-glm.json.
-
-Run `python -m pytest -ra` after installing requirements and pytest 8.4.2. New 0.3.1 commit `37aba3524acd109fd588e495e48a49fe1afecc38` passed **165/165 tests on Ubuntu Python 3.10 and 3.13**, including the four Windows skips. Both jobs also passed the demo, exported regression and offline benchmark steps. [Actual run](https://github.com/karurukaruru/agent-code-validator/actions/runs/40163644009); job evidence is in `evidence/tests/github-actions-glm.json`. The historical section below concerns the prior build.
-
-## Historical 0.3.0 verification
-
-
-On October 25, 2026, the final complete suite ran with Python 3.13.14 and pytest 8.4.2: **143 passed, 4 skipped**. Raw output: `evidence/tests/pytest-final.txt`. Earlier 107-test and 136-test runs remain in `pytest-full.txt` and `pytest-release.txt`. Initial sandbox execution failed two original ACV loopback HTTP integration tests; rerunning with loopback access passed. These are explicit fake-provider tests, not real API evidence.
-
-Commands:
-
-```bash
-python -m pip install -r requirements.txt
-python -m pytest
-python -m unittest tests.test_patchcourt_core tests.test_patchcourt_adversarial tests.test_patchcourt_lab
-python -m patchcourt demo --output outputs/patchcourt
-python -m unittest discover -s outputs/patchcourt -p test_regression.py
-python -m patchcourt benchmark --output outputs/benchmark
-```
-
-Coverage includes existing ACV behavior, controlled semantic mutations, independently authored holdouts, stream assembly/truncation, invalid baselines, secret redaction, knowledge integrity/version changes, repair mutation checks, CLI exit codes, report export and mocked HTTP/schema/Tavily behavior. See independent review for actual bugs found and fixed.
-
-The actual installed NVIDIA SDK reproduction is independently runnable as described in `evidence/full-sdk/README.md`. CrewAI is source-boundary-only. No real provider inference or latency/cost study is claimed. Static JS syntax, DOM-safe rendering and 14 real Chrome checks passed at desktop and 390px widths; see `evidence/browser/qa-results.json` and `docs/JUDGE_REVIEW.md`.
-
-The wheel built successfully and its CLI, both fixture sources and dashboard executed from an isolated extraction outside the source import path (`scripts/verify_wheel.py`, result in `evidence/tests/wheel-verification.json`). A separate local wheel installation succeeded. Static test-build packaging uses an explicit file allowlist (`scripts/package_demo.py`). Secret scanning found no configured credentials or recognized token/private-key markers; this is a scoped check, not a privacy guarantee.
-
-Four skipped tests are existing symlink/directory-link checks: this Windows environment did not permit creating those links. See the `-rs` output for exact test names. Remote Ubuntu CI subsequently passed **all 147 tests** on both Python 3.10 and Python 3.13, including those link tests. Demo, exported regression and benchmark steps also passed. [Verified CI run](https://github.com/karurukaruru/agent-code-validator/actions/runs/40155739894), implementation commit `462fde1dbce1eb46b5f00df5e68cf7aa6bf2d368`; machine-readable status in `evidence/tests/github-actions.json`.
+For the actual recorded NVIDIA/Nebius model workflow, see the repository's current evidence and the release review. Do not infer new model execution from a local test pass.

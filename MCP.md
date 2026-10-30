@@ -13,7 +13,7 @@ monitoring, general source-code review, or automatic approval of a repair.
 
 ## Install and connect
 
-Use Python3.11+ for the optional MCP SDK; the base CLI remains Python3.10+.
+Use Python 3.11+ for the complete default installation, including MCP. Python 3.10 retains legacy CLI compatibility.
 
 ```sh
 python -m pip install -e .

@@ -1,25 +1,16 @@
 # ReviKnot judge testing
 
-Download and extract ReviKnot-Judge-Demo-0.6.0.zip. For the recorded portal,
-Windows double-click Start-Judge-Demo.cmd; other systems run python launch_demo.py.
-Python3.10+ is sufficient. No account, key or payment is needed for replay,
-contract checks or the exported standard-library gates.
+The current repository source version is 0.6.1. Build and publish the matching 0.6.1 judge-demo package before sharing a download URL; do not describe an older 0.6.0 package as the current source package. For the recorded portal, Windows users can double-click Start-Judge-Demo.cmd; other systems can run python launch_demo.py. Follow the included START-HERE instructions.
 
-1. Inspect the actual saved NVIDIA repair:8 checks, corrupted mapping rejected,
-task health check21. Playback sends no new inference requests.
-2. Inspect actual installed SDK1.4.3/1.5.0 evidence: two equally broken outputs
-remain NEEDS_REVIEW. This is a credited historical defect, not a new discovery.
-3. Inspect MCP execution evidence: official SDK client over real stdio,
-4 discovered tools,6 calls, controlled refund-adapter FAIL/PASS/FAIL and
-isolated gate exits1/0/1. This is not a recording of a particular editor host.
-4. Install the included wheel and the optional MCP SDK in Python3.11+ to connect
-your coding host. See MCP.md. MCP checks use supplied local captures, not keys.
-Use examples/refund-agent/capture.py or capture your own explicitly selected
-adapter; a semantic PASS is scoped to the reviewed message schema.
+Replay, contract checks and exported standard-library gates need no account, API key or payment.
 
-Fresh NVIDIA-generated repair is a separate opt-in live command and requires
-lawful provider access. Do not enter private keys into the static portal.
-See FINAL_REMAINING_ZH.md for publication, judging access and entrant steps.
+1. Inspect the recorded NVIDIA/Nebius repair acceptance: eight independent checks, a deliberately corrupted mapping rejected, and the controlled two-tool health check returning 21. This is saved 0.6.0 execution evidence included with the 0.6.1 source tree; playback sends no new inference requests.
+2. Inspect the actual installed NVIDIA SDK 1.4.3/1.5.0 comparison. Two equally broken outputs remain NEEDS_REVIEW rather than being declared compatible.
+3. Inspect MCP execution evidence: the official SDK client launched the real stdio server, discovered four tools and made six calls. The controlled refund-adapter sequence is FAIL/PASS/FAIL, and isolated exported-gate exits are 1/0/1. This is not a recording of a particular editor host.
+4. To connect a coding host, use Python 3.11+ and follow [MCP.md](MCP.md). MCP checks use explicitly supplied local captures, not provider keys.
 
-中文：录制回放、语义检查、门禁和MCP本地验证免费；只有新的模型修复才需要合法API。
-本轮用官方MCP客户端做了真正stdio调用，没有冒充已运行某款编辑器的自动review。
+Use examples/refund-agent/capture.py or capture your own explicitly selected adapter. A semantic PASS is scoped to the reviewed message schema; it is not a universal code-quality approval.
+
+Fresh NVIDIA-generated repair is a separate opt-in live command and requires lawful provider access. Do not enter private keys into the static portal. Submission status and remaining entrant actions are documented in [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md).
+
+中文：录制回放、语义检查、门禁和 MCP 本地验证不需要 API Key；只有新的模型推理才需要合法 API。0.6.1 改善安装与接入，真实 NVIDIA 模型证据仍明确标注为 0.6.0 验收，不冒充新一轮实测。

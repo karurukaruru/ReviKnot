@@ -13,7 +13,7 @@
 python -m pip install -e .
 ```
 
-基础程序支持Python3.10；MCP额外依赖官方SDK，需要3.11+。安装不需要模型API密钥。
+完整默认安装包含官方MCP SDK，使用Python3.11+。Python3.10保留基础CLI兼容；安装不需要模型API密钥。
 
 ## 接到Codex
 

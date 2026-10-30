@@ -406,7 +406,7 @@ def check_form(root, name):
     return "Entrant review recorded; legal/account declarations are not independently verified"
 
 
-def check(root, manifest_name="submission-manifest.example.json"):
+def check(root, manifest_name="submission-manifest.json"):
     root = Path(root).resolve()
     config = read_json(local_file(root, manifest_name))
     if config.get("schema_version") != 1:
@@ -454,7 +454,7 @@ def check(root, manifest_name="submission-manifest.example.json"):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", default="submission-manifest.example.json")
+    parser.add_argument("--manifest", default="submission-manifest.json")
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()

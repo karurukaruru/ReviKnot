@@ -12,5 +12,5 @@
   },
   "video": null,
   "form_review": null,
-  "note": "Template only. Fill in verified public URLs, the exact source commit, final video evidence and reviewed feedback before claiming submission readiness. Null fields intentionally remain blocked."
+  "note": "Submission readiness template only. Fill in verified public URLs, the exact source commit, final video evidence and reviewed feedback before claiming submission readiness. Null fields intentionally remain blocked."
 }

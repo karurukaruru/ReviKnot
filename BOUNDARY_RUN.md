@@ -58,4 +58,4 @@ For already captured traces, `python -m patchcourt check baseline.json candidate
 python scripts/verify_boundary_run.py --output outputs/new-boundary-matrix --sdk-root .sdk-nvidia
 ```
 
-Omit `--sdk-root` for the five dependency-free scenarios. `scripts/qa_boundary_viewer.cjs` checks the exported viewer using local Chrome; `evidence/boundary-run/browser/qa-results.json` records ten passing browser checks. The full local suite recorded **181 passed, 4 Windows permission skips** in `evidence/tests/pytest-boundary-032.txt`. This is local verification, not remote CI for 0.3.2.
+Omit `--sdk-root` for the five dependency-free scenarios. `scripts/qa_boundary_viewer.cjs` checks the exported viewer using local Chrome; `evidence/boundary-run/browser/qa-results.json` records ten passing browser checks. The 0.3.2-era raw test log has been removed from the public source tree as obsolete development output. Current release-wide test status is documented in [TESTING.md](TESTING.md); this historical browser record is not a current CI result.

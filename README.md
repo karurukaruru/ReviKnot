@@ -4,6 +4,9 @@
 
 [简体中文](README.zh-CN.md) · [Quick start](QUICKSTART.md) · [MCP integration](MCP.md) · [4K60 video](https://github.com/karurukaruru/ReviKnot/releases/download/v0.6.0/ReviKnot-96s-Demo.mp4)
 
+
+> **Source note:** The published v0.6.1 release archive is a versioned snapshot from before the later documentation/evidence cleanup. For the currently curated source tree, clone the `main` branch. The runtime version remains 0.6.1.
+
 ReviKnot checks whether an adapter preserves tool-call IDs, nested arguments and other message semantics. Your coding agent gets exact failure paths and can export a runnable regression test. Two equally broken outputs do not count as compatible.
 
 This is the **complete MIT-licensed application**: MCP, CLI, local web interface, source review, provider workflows and regression exports are included. No separate restricted edition or unlock step. The small judge download is a convenient recorded example; [Releases](https://github.com/karurukaruru/ReviKnot/releases/latest) also provides the full source and installable application.

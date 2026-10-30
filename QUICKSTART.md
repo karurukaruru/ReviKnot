@@ -1,6 +1,6 @@
 # Quick start / 快速开始
 
-1. Download the **Source.zip** from [the latest release](https://github.com/karurukaruru/ReviKnot/releases/latest), extract the whole folder, install Python 3.11+, and open a terminal there. / 下载完整源码包，全部解压，准备 Python 3.11+，在该目录打开终端。
+1. Download the published v0.6.1 Source.zip from [Releases](https://github.com/karurukaruru/ReviKnot/releases/latest), or clone the `main` branch for the later curated documentation/evidence tree. Extract or clone the whole folder, install Python 3.11+, and open a terminal there. / 下载已发布的 v0.6.1 Source.zip；如需获取后续整理过的文档与证据，请克隆 `main` 分支。准备 Python 3.11+，在完整项目目录打开终端。
 2. Run the command below. It creates the environment, installs every runtime tool, checks real MCP discovery, generates configuration and opens the local example. / 一个命令完成环境、全部工具、真实连接检查、配置和网页启动。
 
 ```sh

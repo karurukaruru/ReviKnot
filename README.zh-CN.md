@@ -4,6 +4,9 @@
 
 [English](README.md) · [快速开始](QUICKSTART.md) · [MCP 接入](MCP.zh-CN.md) · [96秒演示](https://github.com/karurukaruru/ReviKnot/releases/download/v0.6.0/ReviKnot-96s-Demo.mp4)
 
+
+> **源码版本说明：** 已发布的 v0.6.1 Source.zip 是本轮文档与证据清理之前的版本快照。要获取当前整理后的源码树，请直接克隆 `main` 分支；运行时版本仍为 0.6.1。
+
 ReviKnot 检查工具调用 ID、嵌套参数等内容是否被完整保留，返回具体出错位置，并导出能运行的回归测试。两个输出一样，也可能是两个都错了；检查依据是原始输入契约。
 
 这里公开的是 **MIT 许可的完整程序**，包含 MCP、命令行、网页、源码审查、模型工作流和回归导出。无需解锁功能。评委小包是方便试看的保存记录；[最新 Release](https://github.com/karurukaruru/ReviKnot/releases/latest)同时提供完整源码和安装包。

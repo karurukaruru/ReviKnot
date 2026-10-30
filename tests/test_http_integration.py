@@ -10,6 +10,9 @@ def test_openai_compatible_http_request_runs_end_to_end(tmp_path: Path, monkeypa
     # A machine's proxy must not route this local fake API to an external service.
     monkeypatch.setenv('NO_PROXY', '127.0.0.1,localhost,::1')
     monkeypatch.setenv('no_proxy', '127.0.0.1,localhost,::1')
+    # A SOCKS proxy elsewhere in the environment must not break loopback calls.
+    monkeypatch.setenv('ALL_PROXY', 'socks5h://127.0.0.1:9')
+    monkeypatch.setenv('all_proxy', 'socks5h://127.0.0.1:9')
     received: dict[str, object] = {}
 
     class Handler(BaseHTTPRequestHandler):

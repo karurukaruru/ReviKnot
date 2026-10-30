@@ -11,7 +11,7 @@ requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "ACV Contributors" }]
 keywords = ["code-review", "reviewer-agent", "llm", "cli", "openai-compatible"]
-dependencies = ["openai>=1.30,<3", "mcp>=2,<3; python_version >= '3.11'"]
+dependencies = ["openai>=1.30,<3", "httpx[socks]>=0.28.1,<1", "mcp>=2,<3; python_version >= '3.11'"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Console",

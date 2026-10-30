@@ -1,8 +1,8 @@
 {
   "version": "0.6.1",
   "product": "ReviKnot",
-  "source": "Complete runtime, tests, examples and execution evidence; 2026-10-29 onboarding update",
-  "parent_public_commit": "17ef9cb4e55e8f1471a32d237d03787805494a07",
+  "source": "Development worktree based on v0.6.1 with SOCKS proxy compatibility; not the tagged release",
+  "parent_public_commit": "bfec4608897e81f2b4cf993da67e9a4278313e83",
   "secrets_included": false,
   "license": "MIT",
   "files": {
@@ -3507,8 +3507,8 @@
       "bytes": 22885
     },
     "pyproject.toml": {
-      "sha256": "dbaa822ab8727064df45f910a6a2a27527cc4b0f618e9e400dcaaf3d211d1414",
-      "bytes": 1319
+      "sha256": "4ddcbdd49bff9f6e29835d6276d4b966ec9cb8d9555b527c21ba4d77c976fefc",
+      "bytes": 1346
     },
     "QUICKSTART.md": {
       "sha256": "c3b1d0fa28ac31472c41943d4aea6821a68e31c50c47dcca2d9339e7dfcbd585",
@@ -3551,8 +3551,8 @@
       "bytes": 2812
     },
     "requirements.txt": {
-      "sha256": "d8df96930a5dc3a601ab96295a41d34bbcf876b7a28d60bcc8c314423819d22f",
-      "bytes": 33
+      "sha256": "c2e244324c6887a273195c9cc7970a8c05c8d7e95a65045f5cda6045b2263bcf",
+      "bytes": 58
     },
     "REQUIREMENTS_GAP_AUDIT.md": {
       "sha256": "cfbb1d03a213dad12535ab491660555990b000cdf86da7e1aac2ce2efd0faeb4",
@@ -3791,8 +3791,8 @@
       "bytes": 1450
     },
     "tests/test_http_integration.py": {
-      "sha256": "3e064988b5103b7db297fc04813ba6b05f3e953890236518f358faf1e76c73d3",
-      "bytes": 3126
+      "sha256": "d135ba0b3f21ebcad82fd29c53ec4e2753d73fa9280c4b6cd98a6a4dab712cdd",
+      "bytes": 3331
     },
     "tests/test_judge_package.py": {
       "sha256": "e8faea65e7b30bfcb4e91ec29059cf27e58f4c593b18db6cbf72e0fb8f948304",
@@ -3997,6 +3997,10 @@
     "使用说明.md": {
       "sha256": "f34e3bceaf36a70c3db11f9437a70d9a7e3743347a2761b7a31e7cb41b08ce65",
       "bytes": 11649
+    },
+    "tests/test_socks_proxy_integration.py": {
+      "sha256": "fa8905a4449832dce8a375bf93857b73379072a0fabbc87276d69bc7ecc51798",
+      "bytes": 3003
     }
   },
   "note": "Original0.6.0provider evidence is retained. Hashes show integrity, not independent producer authentication."

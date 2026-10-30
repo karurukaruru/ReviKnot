@@ -22,8 +22,12 @@ from copy import deepcopy
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-DOCUMENTS = ("README.md", "LICENSE", "DEVPOST_SUBMISSION.md", "MOST_VALUABLE_FEEDBACK.md",
-             "DEMO_SCRIPT.md", "JUDGE_TESTING.md", "SUBMISSION_CHECKLIST.md", "COMPETITION_CHANGELOG.md")
+DOCUMENTS = ("README.md", "README.zh-CN.md", "LICENSE", "DEVPOST_SUBMISSION.md",
+             "MOST_VALUABLE_FEEDBACK.md", "DEMO_SCRIPT.md", "JUDGE_TESTING.md",
+             "SUBMISSION_CHECKLIST.md", "CHANGELOG.md", "RELEASE_REVIEW_061_ZH.md",
+             "QUICKSTART.md", "MCP.md", "MCP.zh-CN.md", "TESTING.md",
+             "OUTPUT_SETTINGS_ZH.md", "docs/submission-061/01_Entry_English.md",
+             "docs/submission-061/03_Feedback_平台反馈_EN_ZH.md")
 OFFICIAL_API = "https://api.tokenfactory.nebius.com/v1/chat/completions"
 INFERENCE_APIS = {"nebius": OFFICIAL_API, "deepseek": "https://api.deepseek.com/chat/completions",
                   "glm": "https://open.bigmodel.cn/api/paas/v4/chat/completions"}
@@ -402,7 +406,7 @@ def check_form(root, name):
     return "Entrant review recorded; legal/account declarations are not independently verified"
 
 
-def check(root, manifest_name="submission-manifest.json"):
+def check(root, manifest_name="submission-manifest.example.json"):
     root = Path(root).resolve()
     config = read_json(local_file(root, manifest_name))
     if config.get("schema_version") != 1:
@@ -450,7 +454,7 @@ def check(root, manifest_name="submission-manifest.json"):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", default="submission-manifest.json")
+    parser.add_argument("--manifest", default="submission-manifest.example.json")
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
